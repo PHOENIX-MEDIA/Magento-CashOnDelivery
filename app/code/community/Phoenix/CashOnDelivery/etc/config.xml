@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Phoenix
+ * @package    Phoenix_CashOnDelivery
+ * @copyright  Copyright (c) 2008-2009 Andrej Sinicyn, Mik3e
+ * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Phoenix_CashOnDelivery>
+            <version>1.0.6</version>
+        </Phoenix_CashOnDelivery>
+    </modules>
+
+    <global>
+        <models>
+            <cashondelivery>
+                <class>Phoenix_CashOnDelivery_Model</class>
+            </cashondelivery>
+        </models>
+        <resources>
+            <cashondelivery_setup>
+                <setup>
+                    <module>Phoenix_CashOnDelivery</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </cashondelivery_setup>
+            <cashondelivery_write>
+                <use>core_write</use>
+            </cashondelivery_write>
+            <cashondelivery_read>
+                <use>core_read</use>
+            </cashondelivery_read>
+        </resources>
+        <helpers>
+            <cashondelivery>
+                <class>Phoenix_CashOnDelivery_Helper</class>
+            </cashondelivery>
+        </helpers>
+        <blocks>
+            <cashondelivery><class>Phoenix_CashOnDelivery_Block</class></cashondelivery>
+        </blocks>
+        <sales>
+            <quote>
+                <totals>
+                    <cashondelivery>
+                        <class>cashondelivery/quote_total</class>
+                        <after>subtotal,discount,shipping</after>
+                        <before>tax,grand_total</before>
+                        <renderer>cashondelivery/checkout_cod</renderer>
+                        <admin_renderer>cashondelivery/adminhtml_sales_order_create_totals_cod</admin_renderer>
+                    </cashondelivery>
+                    <cashondelivery_tax>
+                        <class>cashondelivery/quote_taxTotal</class>
+                        <after>subtotal,discount,shipping,tax</after>
+                        <before>grand_total</before>
+                    </cashondelivery_tax>
+                </totals>
+            </quote>
+            <order_invoice>
+                <totals>
+                    <cashondelivery>
+                        <class>cashondelivery/invoice_total</class>
+                    </cashondelivery>
+                    <cashondelivery_tax>
+                        <class>cashondelivery/invoice_tax</class>
+                    </cashondelivery_tax>
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <cashondelivery>
+                        <class>cashondelivery/creditmemo_total</class>
+                    </cashondelivery>
+                </totals>
+            </order_creditmemo>
+        </sales>
+        <events>
+            <sales_quote_collect_totals_after>
+                <observers>
+                    <cashondelivery>
+                        <type>singleton</type>
+                        <class>cashondelivery/observer</class>
+                        <method>sales_quote_collect_totals_after</method>
+                    </cashondelivery>
+                </observers>
+            </sales_quote_collect_totals_after>
+            <sales_order_payment_place_end>
+                <observers>
+                    <cashondelivery>
+                        <type>singleton</type>
+                        <class>cashondelivery/observer</class>
+                        <method>sales_order_payment_place_end</method>
+                    </cashondelivery>
+                </observers>
+            </sales_order_payment_place_end>
+        </events>
+        <pdf>
+            <totals>
+                <cashondelivery translate="title">
+                    <title>Cash on Delivery fee</title>
+                    <source_field>cod_fee</source_field>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>450</sort_order>
+                    <model>cashondelivery/sales_pdf_cod</model>
+                </cashondelivery>
+            </totals>
+        </pdf>
+    </global>
+
+    <default>
+        <sales>
+            <totals_sort>
+                <cashondelivery>35</cashondelivery>
+            </totals_sort>
+        </sales>
+        <payment>
+            <cashondelivery>
+                <active>0</active>
+                <model>cashondelivery/cashOnDelivery</model>
+                <order_status>1</order_status>
+                <title>Cash on Delivery</title>
+                <allowspecific>0</allowspecific>
+                <shippingallowspecific>0</shippingallowspecific>
+                <disallowspecificshippingmethods>0</disallowspecificshippingmethods>
+                <display_zero_fee>0</display_zero_fee>
+            </cashondelivery>
+        </payment>
+        <sales>
+            <totals_sort>
+                <cashondelivery>39</cashondelivery>
+                <cashondelivery_tax>97</cashondelivery_tax>
+            </totals_sort>
+        </sales>
+        <tax>
+            <classes>
+                <cod_tax_class></cod_tax_class>
+            </classes>
+            <calculation>
+                <cod_includes_tax>0</cod_includes_tax>
+            </calculation>
+            <display>
+                <cod_fee>1</cod_fee>
+            </display>
+        </tax>
+    </default>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <Phoenix_CashOnDelivery>
+                    <files>
+                        <default>Phoenix_CashOnDelivery.csv</default>
+                    </files>
+                </Phoenix_CashOnDelivery>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <cashondelivery>
+                    <file>cashondelivery.xml</file>
+                </cashondelivery>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <frontend>
+        <layout>
+            <updates>
+                <cashondelivery>
+                    <file>cashondelivery.xml</file>
+                </cashondelivery>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Phoenix_CashOnDelivery>
+                    <files>
+                        <default>Phoenix_CashOnDelivery.csv</default>
+                    </files>
+                </Phoenix_CashOnDelivery>
+            </modules>
+        </translate>
+    </frontend>
+</config>

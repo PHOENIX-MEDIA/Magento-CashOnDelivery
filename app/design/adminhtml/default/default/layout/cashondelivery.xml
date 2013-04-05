@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Phoenix_CashOnDelivery
+ * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+
+<layout>
+    <adminhtml_sales_order_view>
+        <!--
+        <reference name="sales.order.view.totals.main">
+            <block type="adminhtml/sales_order_totals_item" name="cod_fee" template="sales/order/totals/item.phtml" before="tax">
+                <action method="setSourceField"><value>cod_fee</value></action>
+                <action method="setLabel"><value>Cash on Delivery Fee</value></action>
+            </block>
+        </reference>
+        -->
+        <reference name="order_totals">
+            <block name="cod_fee" type="cashondelivery/order_totals_cod" before="tax"/>
+        </reference>
+    </adminhtml_sales_order_view>
+
+    <adminhtml_sales_order_invoice_view>
+        <!--
+        <reference name="sales.order.view.totals.main">
+            <block type="adminhtml/sales_order_totals_item" name="cod_fee" template="sales/order/totals/item.phtml" before="tax">
+                <action method="setSourceField"><value>cod_fee</value></action>
+                <action method="setLabel"><value>Cash on Delivery Fee</value></action>
+            </block>
+        </reference>
+        -->
+        <reference name="invoice_totals">
+            <block name="cod_fee" type="cashondelivery/invoice_totals_cod" before="tax"/>
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+
+    <adminhtml_sales_order_invoice_new>
+        <!--
+        <reference name="sales.order.view.totals.main">
+            <block type="adminhtml/sales_order_totals_item" name="cod_fee" template="sales/order/totals/item.phtml" before="tax">
+                <action method="setSourceField"><value>cod_fee</value></action>
+                <action method="setLabel"><value>Cash on Delivery Fee</value></action>
+            </block>
+        </reference>
+        -->
+        <reference name="invoice_totals">
+            <block name="cod_fee" type="cashondelivery/invoice_totals_cod" before="tax"/>
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block name="cod_fee" type="cashondelivery/invoice_totals_cod" before="tax"/>
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="sales.order.view.totals.main">
+            <block type="adminhtml/sales_order_totals_item" name="cod_fee" template="sales/order/totals/item.phtml" before="tax">
+                <action method="setSourceField"><value>cod_fee</value></action>
+                <action method="setLabel"><value>Cash on Delivery Fee</value></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="sales.order.view.totals.main">
+            <block type="adminhtml/sales_order_totals_item" name="cod_fee" template="sales/order/totals/item.phtml" before="tax">
+                <action method="setSourceField"><value>cod_fee</value></action>
+                <action method="setLabel"><value>Cash on Delivery Fee</value></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs"><file>phoenix/cashondelivery/sales.js</file></action>
+        </reference>
+    </adminhtml_sales_order_create_index>
+
+</layout>

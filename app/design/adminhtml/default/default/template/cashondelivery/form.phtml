@@ -1,0 +1,27 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   Phoenix
+ * @package    Phoenix_CashOnDelivery
+ * @copyright  Copyright (c) 2008-2009 Andrej Sinicyn, Mik3e
+ * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+?>
+<ul id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
+    <li>
+        <div class="input-box">
+            <?php if ($this->getMethod()->getCustomText()): ?>
+                <?php echo $this->getMethod()->getCustomText() ?><br />
+            <?php endif; ?>
+        </div>
+    </li>
+</ul>
