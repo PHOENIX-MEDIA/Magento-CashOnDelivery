@@ -82,6 +82,9 @@
                     <cashondelivery_tax>
                         <class>cashondelivery/invoice_tax</class>
                     </cashondelivery_tax>
+                    <subtotal>
+                      <class>cashondelivery/invoice_subtotal</class>
+                    </subtotal>
                 </totals>
             </order_invoice>
             <order_creditmemo>
