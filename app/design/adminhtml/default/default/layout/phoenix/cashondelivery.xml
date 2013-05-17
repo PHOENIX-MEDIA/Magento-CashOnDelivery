@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Phoenix
+ * @package    Phoenix_CashOnDelivery
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+
+<layout>
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/order_totals_cod" before="tax"/>
+        </reference>
+    </adminhtml_sales_order_view>
+
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/invoice_totals_cod" before="tax"/>
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/invoice_totals_cod" before="tax"/>
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/invoice_totals_cod" before="tax"/>
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="sales.order.view.totals.main">
+            <block type="adminhtml/sales_order_totals_item" name="phoenix_cashondelivery_fee" template="sales/order/totals/item.phtml" before="tax">
+                <action method="setSourceField"><value>phoenix_cashondelivery_fee</value></action>
+                <action method="setLabel"><value>Cash on Delivery Fee</value></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="sales.order.view.totals.main">
+            <block type="adminhtml/sales_order_totals_item" name="phoenix_cashondelivery_fee" template="sales/order/totals/item.phtml" before="tax">
+                <action method="setSourceField"><value>phoenix_cashondelivery_fee</value></action>
+                <action method="setLabel"><value>Cash on Delivery Fee</value></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs"><file>phoenix/cashondelivery/sales.js</file></action>
+        </reference>
+    </adminhtml_sales_order_create_index>
+
+</layout>

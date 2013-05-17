@@ -14,7 +14,7 @@
  *
  * @category   Phoenix
  * @package    Phoenix_CashOnDelivery
- * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -24,7 +24,7 @@ class Phoenix_CashOnDelivery_Model_Invoice_Total extends Mage_Sales_Model_Order_
     {
         $order = $invoice->getOrder();
 
-        if ($order->getPayment()->getMethodInstance()->getCode() != 'cashondelivery') {
+        if ($order->getPayment()->getMethodInstance()->getCode() != 'phoenix_cashondelivery') {
             return $this;
         }
 
@@ -32,28 +32,28 @@ class Phoenix_CashOnDelivery_Model_Invoice_Total extends Mage_Sales_Model_Order_
             return $this;
         }
 
-        foreach ($invoice->getOrder()->getInvoiceCollection() as $previusInvoice) {
-            if ($previusInvoice->getCodAmount() && !$previusInvoice->isCanceled()) {
+        foreach ($invoice->getOrder()->getInvoiceCollection() as $previousInvoice) {
+            if ($previousInvoice->getCodAmount() && !$previousInvoice->isCanceled()) {
                 $includeCodTax = false;
             }
         }
 
-        $baseCodFee = $order->getBaseCodFee();
+        $baseCodFee         = $order->getBaseCodFee();
         $baseCodFeeInvoiced = $order->getBaseCodFeeInvoiced();
-        $baseInvoiceTotal = $invoice->getBaseGrandTotal();
-        $codFee = $order->getCodFee();
-        $codFeeInvoiced = $order->getCodFeeInvoiced();
-        $invoiceTotal = $invoice->getGrandTotal();
+        $baseInvoiceTotal   = $invoice->getBaseGrandTotal();
+        $codFee             = $order->getCodFee();
+        $codFeeInvoiced     = $order->getCodFeeInvoiced();
+        $invoiceTotal       = $invoice->getGrandTotal();
 
         if (!$baseCodFee || $baseCodFeeInvoiced==$baseCodFee) {
             return $this;
         }
 
         $baseCodFeeToInvoice = $baseCodFee - $baseCodFeeInvoiced;
-        $codFeeToInvoice = $codFee - $codFeeInvoiced;
+        $codFeeToInvoice     = $codFee - $codFeeInvoiced;
 
         $baseInvoiceTotal = $baseInvoiceTotal + $baseCodFeeToInvoice;
-        $invoiceTotal = $invoiceTotal + $codFeeToInvoice;
+        $invoiceTotal     = $invoiceTotal + $codFeeToInvoice;
 
         $invoice->setBaseGrandTotal($baseInvoiceTotal);
         $invoice->setGrandTotal($invoiceTotal);

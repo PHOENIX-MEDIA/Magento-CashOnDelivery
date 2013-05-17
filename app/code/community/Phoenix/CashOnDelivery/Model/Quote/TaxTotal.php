@@ -14,15 +14,15 @@
  *
  * @category   Phoenix
  * @package    Phoenix_CashOnDelivery
- * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 class Phoenix_CashOnDelivery_Model_Quote_TaxTotal extends Mage_Sales_Model_Quote_Address_Total_Tax
 {
-    const CONFIG_XML_PATH_COD_TAX_CLASS =    'tax/classes/cod_tax_class';
-    const CONFIG_XML_PATH_COD_INCLUDES_TAX = 'tax/calculation/cod_includes_tax';
-    const CONFIG_XML_PATH_DISPLAY_COD = 'tax/display/cod_fee';
+    const CONFIG_XML_PATH_COD_TAX_CLASS    = 'tax/classes/phoenix_cashondelivery_tax_class';
+    const CONFIG_XML_PATH_COD_INCLUDES_TAX = 'tax/calculation/phoenix_cashondelivery_includes_tax';
+    const CONFIG_XML_PATH_DISPLAY_COD      = 'tax/display/phoenix_cashondelivery_fee';
 
     public function collect(Mage_Sales_Model_Quote_Address $address)
     {
@@ -33,7 +33,7 @@ class Phoenix_CashOnDelivery_Model_Quote_TaxTotal extends Mage_Sales_Model_Quote
 
         $paymentMethod = $address->getQuote()->getPayment()->getMethodInstance();
 
-        if ($paymentMethod->getCode() != 'cashondelivery') {            
+        if ($paymentMethod->getCode() != 'phoenix_cashondelivery') {
             return $this;
         }
 
@@ -54,14 +54,14 @@ class Phoenix_CashOnDelivery_Model_Quote_TaxTotal extends Mage_Sales_Model_Quote
             $custTaxClassId,
             $store
         );
-        $codTaxClass = Mage::helper('cashondelivery')->getCodTaxClass($store);
+        $codTaxClass = Mage::helper('phoenix_cashondelivery')->getCodTaxClass($store);
 
         $codTax      = 0;
         $codBaseTax  = 0;
 
         if ($codTaxClass) {
             if ($rate = $taxCalculationModel->getRate($request->setProductClassId($codTaxClass))) {
-                if (!Mage::helper('cashondelivery')->codPriceIncludesTax()) {
+                if (!Mage::helper('phoenix_cashondelivery')->codPriceIncludesTax()) {
                     $codTax    = $address->getCodFee() * $rate/100;
                     $codBaseTax= $address->getBaseCodFee() * $rate/100;
                 } else {
@@ -85,7 +85,7 @@ class Phoenix_CashOnDelivery_Model_Quote_TaxTotal extends Mage_Sales_Model_Quote
             }
         }
 
-        if (!Mage::helper('cashondelivery')->codPriceIncludesTax()) {
+        if (!Mage::helper('phoenix_cashondelivery')->codPriceIncludesTax()) {
             $address->setCodTaxAmount($codTax);
             $address->setBaseCodTaxAmount($codBaseTax);
         }

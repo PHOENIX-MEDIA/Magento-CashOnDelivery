@@ -1,13 +1,16 @@
 <?php
-
 /**
  * Magento
  *
  * NOTICE OF LICENSE
  *
  * This source file is subject to the Open Software License (OSL 3.0)
- * that is available through the world-wide-web at this URL:
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
  *
  * @category   Phoenix
  * @package    Phoenix_CashOnDelivery
@@ -23,11 +26,11 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     *
     * @var string [a-z0-9_]
     */
-    protected $_code = 'cashondelivery';
+    protected $_code                    = 'phoenix_cashondelivery';
     protected $_canUseForMultishipping  = false;
 
-    protected $_formBlockType = 'cashondelivery/form';
-    protected $_infoBlockType = 'cashondelivery/info';
+    protected $_formBlockType = 'phoenix_cashondelivery/form';
+    protected $_infoBlockType = 'phoenix_cashondelivery/info';
 
     public function getCODTitle()
     {
@@ -65,43 +68,34 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
         }
     }
 
-    public function getAddressCodFee(Mage_Customer_Model_Address_Abstract $address, $value = null,
-        $alreadyExclTax = false)
+    public function getAddressCodFee(Mage_Customer_Model_Address_Abstract $address, $value = null, $alreadyExclTax = false)
     {
+        $helper = Mage::helper('phoenix_cashondelivery');
+
         if (is_null($value)) {
             $value = $this->getAddressCosts($address);
         }
-        if (Mage::helper('cashondelivery')->codPriceIncludesTax()) {
+
+        if ($helper->codPriceIncludesTax()) {
             if (!$alreadyExclTax) {
-                $value = Mage::helper('cashondelivery')->getCodPrice(
-                    $value,
-                    false,
-                    $address,
-                    $address->getQuote()->getCustomerTaxClassId()
-                );
+                $value = $helper->getCodPrice($value, false, $address, $address->getQuote()->getCustomerTaxClassId());
             }
         }
         return $value;
     }
 
-    public function getAddressCodTaxAmount(Mage_Customer_Model_Address_Abstract $address, $value = null,
-        $alreadyExclTax = false)
+    public function getAddressCodTaxAmount(Mage_Customer_Model_Address_Abstract $address, $value = null, $alreadyExclTax = false)
     {
+        $helper = Mage::helper('phoenix_cashondelivery');
+
         if (is_null($value)) {
             $value = $this->getAddressCosts($address);
         }
-        if (Mage::helper('cashondelivery')->codPriceIncludesTax()) {
-            $includingTax = Mage::helper('cashondelivery')->getCodPrice(
-                $value,
-                true,
-                $address, $address->getQuote()->getCustomerTaxClassId()
-            );
+
+        if ($helper->codPriceIncludesTax()) {
+            $includingTax = $helper->getCodPrice($value, true, $address, $address->getQuote()->getCustomerTaxClassId());
             if (!$alreadyExclTax) {
-                $value = Mage::helper('cashondelivery')->getCodPrice(
-                    $value,
-                    false,
-                    $address, $address->getQuote()->getCustomerTaxClassId()
-                );
+                $value = $helper->getCodPrice($value, false, $address, $address->getQuote()->getCustomerTaxClassId());
             }
             return $includingTax - $value;
         }
@@ -120,17 +114,18 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
         }
         if (!is_null($quote)) {
             if ($this->getConfigData('shippingallowspecific', $quote->getStoreId()) == 1) {
-                $country = $quote->getShippingAddress()->getCountry();
+                $country            = $quote->getShippingAddress()->getCountry();
                 $availableCountries = $this->getConfigData('shippingspecificcountry', $quote->getStoreId());
+
                 if (!in_array($country, explode(',', $availableCountries))) {
                     return false;
                 }
-
             }
             if ($this->getConfigData('disallowspecificshippingmethods', $quote->getStoreId()) == 1) {
-                $shippingMethodCode = explode('_', $quote->getShippingAddress()->getShippingMethod());
-                $shippingMethodCode = $shippingMethodCode[0];
+                $shippingMethodCode        = explode('_', $quote->getShippingAddress()->getShippingMethod());
+                $shippingMethodCode        = $shippingMethodCode[0];
                 $disallowedShippingMethods = $this->getConfigData('disallowedshippingmethods', $quote->getStoreId());
+
                 if (in_array($shippingMethodCode, explode(',', $disallowedShippingMethods))) {
                     return false;
                 }

@@ -14,7 +14,7 @@
  *
  * @category   Phoenix
  * @package    Phoenix_CashOnDelivery
- * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -25,7 +25,7 @@ class Phoenix_CashOnDelivery_Model_Creditmemo_Total extends Mage_Sales_Model_Ord
 
         $order = $cm->getOrder();
 
-        if ($order->getPayment()->getMethodInstance()->getCode() != 'cashondelivery') {
+        if ($order->getPayment()->getMethodInstance()->getCode() != 'phoenix_cashondelivery') {
             return $this;
         }
 

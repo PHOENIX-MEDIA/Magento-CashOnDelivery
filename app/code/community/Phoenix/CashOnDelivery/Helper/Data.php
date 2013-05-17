@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Magento
  *
@@ -15,33 +14,39 @@
  *
  * @category   Phoenix
  * @package    Phoenix_CashOnDelivery
- * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 class Phoenix_CashOnDelivery_Helper_Data extends Mage_Core_Helper_Data
 {
 
-    protected $_codPriceIncludesTax;
+    /**
+     * Instance variable for lazy load.
+     * @var array
+     */
+    protected $_codPriceIncludesTax = array();
+
+    /**
+     * Instance variable for lazy load.
+     * @var array
+     */
+    protected $_shippingPriceDisplayType = array();
 
     public function codPriceIncludesTax($store = null)
     {
-        $storeId = Mage::app()->getStore($store)->getId();
+        $store   = Mage::app()->getStore($store);
+        $storeId = $store->getId();
+
         if (!isset($this->_codPriceIncludesTax[$storeId])) {
-            $this->_codPriceIncludesTax[$storeId] = (int)Mage::getStoreConfig(
-                Phoenix_CashOnDelivery_Model_Quote_TaxTotal::CONFIG_XML_PATH_COD_INCLUDES_TAX,
-                $store
-            );
+            $this->_codPriceIncludesTax[$storeId] = (int)Mage::getStoreConfig(Phoenix_CashOnDelivery_Model_Quote_TaxTotal::CONFIG_XML_PATH_COD_INCLUDES_TAX, $store);
         }
         return $this->_codPriceIncludesTax[$storeId];
     }
 
-    public function getCodTaxClass($store)
+    public function getCodTaxClass($store = null)
     {
-        return (int)Mage::getStoreConfig(
-            Phoenix_CashOnDelivery_Model_Quote_TaxTotal::CONFIG_XML_PATH_COD_TAX_CLASS,
-            $store
-        );
+        return (int)Mage::getStoreConfig(Phoenix_CashOnDelivery_Model_Quote_TaxTotal::CONFIG_XML_PATH_COD_TAX_CLASS, $store);
     }
 
     public function getCodPrice($price, $includingTax = null, $shippingAddress = null, $ctc = null, $store = null)

@@ -14,7 +14,7 @@
  *
  * @category   Phoenix
  * @package    Phoenix_CashOnDelivery
- * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -22,10 +22,9 @@
  * COD fee Total Row Renderer
  * 
  */
-
 class Phoenix_CashOnDelivery_Block_Checkout_Cod extends Mage_Checkout_Block_Total_Default
 {
-    protected $_template = 'cashondelivery/checkout/cod.phtml';
+    protected $_template = 'phoenix/cashondelivery/checkout/cod.phtml';
 
     /**
      * Check if we need display COD fee include and exlude tax
@@ -34,7 +33,7 @@ class Phoenix_CashOnDelivery_Block_Checkout_Cod extends Mage_Checkout_Block_Tota
      */
     public function displayBoth()
     {
-        return Mage::helper('cashondelivery')->displayCodBothPrices();
+        return Mage::helper('phoenix_cashondelivery')->displayCodBothPrices();
     }
 
     /**
@@ -44,7 +43,7 @@ class Phoenix_CashOnDelivery_Block_Checkout_Cod extends Mage_Checkout_Block_Tota
      */
     public function displayIncludeTax()
     {
-        return Mage::helper('cashondelivery')->displayCodFeeIncludingTax();
+        return Mage::helper('phoenix_cashondelivery')->displayCodFeeIncludingTax();
     }
 
     /**
@@ -82,7 +81,7 @@ class Phoenix_CashOnDelivery_Block_Checkout_Cod extends Mage_Checkout_Block_Tota
      */
     public function getIncludeTaxLabel()
     {
-        return $this->helper('cashondelivery')->__('Cash on Delivery fee (Incl.Tax)');
+        return $this->helper('phoenix_cashondelivery')->__('Cash on Delivery fee (Incl.Tax)');
     }
 
     /**
@@ -92,6 +91,6 @@ class Phoenix_CashOnDelivery_Block_Checkout_Cod extends Mage_Checkout_Block_Tota
      */
     public function getExcludeTaxLabel()
     {
-        return $this->helper('cashondelivery')->__('Cash on Delivery fee (Excl.Tax)');
+        return $this->helper('phoenix_cashondelivery')->__('Cash on Delivery fee (Excl.Tax)');
     }
 }

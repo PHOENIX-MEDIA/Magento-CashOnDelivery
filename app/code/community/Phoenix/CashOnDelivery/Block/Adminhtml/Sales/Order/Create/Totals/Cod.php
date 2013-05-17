@@ -14,7 +14,7 @@
  *
  * @category   Phoenix
  * @package    Phoenix_CashOnDelivery
- * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -22,45 +22,67 @@
  * COD fee Total Row Renderer
  * 
  */
-
-class Phoenix_CashOnDelivery_Block_Adminhtml_Sales_Order_Create_Totals_Cod
-    extends Mage_Adminhtml_Block_Sales_Order_Create_Totals_Default
+class Phoenix_CashOnDelivery_Block_Adminhtml_Sales_Order_Create_Totals_Cod extends Mage_Adminhtml_Block_Sales_Order_Create_Totals_Default
 {
-    protected $_template = 'cashondelivery/sales/order/create/totals/cod.phtml';
+    /**
+     * Path to template file in theme.
+     *
+     * @var string
+     */
+    protected $_template = 'phoenix/cashondelivery/sales/order/create/totals/cod.phtml';
 
     /**
-     * Check if we need display COD fee include and exlude tax
+     * Variable to lazy load the helper.
+     *
+     * @var Phoenix_CashOnDelivery_Helper_Data
+     */
+    protected $_helper;
+
+    /**
+     * Get the helper object.
+     *
+     * @return Phoenix_CashOnDelivery_Helper_Data
+     */
+    protected function _getHelper()
+    {
+        if (!$this->_helper) {
+            $this->_helper = Mage::helper('phoenix_cashondelivery');
+        }
+        return $this->_helper;
+    }
+
+    /**
+     * Check if we need to display the CoD fee including and excluding the tax.
      *
      * @return bool
      */
     public function displayBoth()
     {
-        return Mage::helper('cashondelivery')->displayCodBothPrices();
+        return $this->_getHelper()->displayCodBothPrices();
     }
 
     /**
-     * Check if we need display COD fee include tax
+     * Check if we need to display the CoD fee including the tax.
      *
      * @return bool
      */
     public function displayIncludeTax()
     {
-        return Mage::helper('cashondelivery')->displayCodFeeIncludingTax();
+        return $this->_getHelper()->displayCodFeeIncludingTax();
     }
 
     /**
-     * Get COD fee include tax
+     * Get the CoD fee including the tax.
      *
      * @return float
      */
     public function getCodFeeIncludeTax()
     {
-        return $this->getTotal()->getAddress()->getCodFee() +
-            $this->getTotal()->getAddress()->getCodTaxAmount();
+        return $this->getTotal()->getAddress()->getCodFee() + $this->getTotal()->getAddress()->getCodTaxAmount();
     }
 
     /**
-     * Get COD fee exclude tax
+     * Get the CoD fee excluding the tax.
      *
      * @return float
      */
@@ -70,22 +92,22 @@ class Phoenix_CashOnDelivery_Block_Adminhtml_Sales_Order_Create_Totals_Cod
     }
 
     /**
-     * Get label for COD fee include tax
+     * Get the label for the CoD fee including the tax.
      *
      * @return float
      */
     public function getIncludeTaxLabel()
     {
-        return $this->helper('cashondelivery')->__('Cash on Delivery fee Incl. Tax');
+        return $this->_getHelper()->__('Cash on Delivery fee Incl. Tax');
     }
 
     /**
-     * Get label for COD fee exclude tax
+     * Get the label for the CoD fee excluding the tax.
      *
      * @return float
      */
     public function getExcludeTaxLabel()
     {
-        return $this->helper('cashondelivery')->__('Cash on Delivery fee Excl. Tax');
+        return $this->_getHelper()->__('Cash on Delivery fee Excl. Tax');
     }
 }

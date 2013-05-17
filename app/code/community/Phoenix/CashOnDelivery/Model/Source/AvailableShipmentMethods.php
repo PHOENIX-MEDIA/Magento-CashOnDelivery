@@ -13,8 +13,9 @@
  * to license@magentocommerce.com so we can send you a copy immediately.
  *
  * @category   Phoenix
- * @package    Phoenix_Ipayment
- * @copyright  Copyright (c) 2008 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @package    Phoenix_CashOnDelivery
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 class Phoenix_CashOnDelivery_Model_Source_AvailableShipmentMethods

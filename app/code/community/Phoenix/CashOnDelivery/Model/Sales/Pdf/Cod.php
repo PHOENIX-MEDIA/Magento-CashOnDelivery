@@ -12,16 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@magentocommerce.com so we can send you a copy immediately.
  *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
- *
- * @category    Mage
- * @package     Mage_Tax
- * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category   Phoenix
+ * @package    Phoenix_CashOnDelivery
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 class Phoenix_CashOnDelivery_Model_Sales_Pdf_Cod extends Mage_Sales_Model_Order_Pdf_Total_Default
@@ -39,39 +33,42 @@ class Phoenix_CashOnDelivery_Model_Sales_Pdf_Cod extends Mage_Sales_Model_Order_
      */
     public function getTotalsForDisplay()
     {
-        $store = $this->getOrder()->getStore();        
-        $amount = $this->getOrder()->formatPriceTxt($this->getAmount());
-        $amountInclTax = $this->getAmount()+$this->getSource()->getCodTaxAmount();
+        $amount        = $this->getOrder()->formatPriceTxt($this->getAmount());
+        $amountInclTax = $this->getAmount() + $this->getSource()->getCodTaxAmount();
         $amountInclTax = $this->getOrder()->formatPriceTxt($amountInclTax);
-        $fontSize = $this->getFontSize() ? $this->getFontSize() : 7;
+        $fontSize      = $this->getFontSize() ? $this->getFontSize() : 7;
+        $helper        = Mage::helper('phoenix_cashondelivery');
 
-        if (Mage::helper('cashondelivery')->displayCodBothPrices()){
+        if ($helper->displayCodBothPrices()){
             $totals = array(
                 array(
                     'amount'    => $this->getAmountPrefix().$amount,
-                    'label'     => Mage::helper('cashondelivery')->__('Cash on Delivery fee (Excl.Tax)') . ':',
+                    'label'     => $helper->__('Cash on Delivery fee (Excl.Tax)') . ':',
                     'font_size' => $fontSize
                 ),
                 array(
                     'amount'    => $this->getAmountPrefix().$amountInclTax,
-                    'label'     => Mage::helper('cashondelivery')->__('Cash on Delivery fee (Incl.Tax)') . ':',
+                    'label'     => $helper->__('Cash on Delivery fee (Incl.Tax)') . ':',
                     'font_size' => $fontSize
                 ),
             );
-        } elseif (Mage::helper('cashondelivery')->displayCodFeeIncludingTax()) {
-            $totals = array(array(
-                'amount'    => $this->getAmountPrefix().$amountInclTax,
-                'label'     => Mage::helper('cashondelivery')->__($this->getTitle()) . ':',
-                'font_size' => $fontSize
-            ));
+        } elseif ($helper->displayCodFeeIncludingTax()) {
+            $totals = array(
+                array(
+                    'amount'    => $this->getAmountPrefix().$amountInclTax,
+                    'label'     => $helper->__($this->getTitle()) . ':',
+                    'font_size' => $fontSize
+                )
+            );
         } else {
-            $totals = array(array(
-                'amount'    => $this->getAmountPrefix().$amount,
-                'label'     => Mage::helper('cashondelivery')->__($this->getTitle()) . ':',
-                'font_size' => $fontSize
-            ));
+            $totals = array(
+                array(
+                    'amount'    => $this->getAmountPrefix().$amount,
+                    'label'     => $helper->__($this->getTitle()) . ':',
+                    'font_size' => $fontSize
+                )
+            );
         }
-
         return $totals;
     }
 }
