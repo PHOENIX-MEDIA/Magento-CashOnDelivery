@@ -21,10 +21,10 @@
 class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
 {
     /**
-     * Collects codFee from qoute/addresses to quote
+     * Collects codFee from quote/addresses to quote
      *
      * @param Varien_Event_Observer $observer
-     *
+     * @return Phoenix_CashOnDelivery_Model_Observer
      */
     public function sales_quote_collect_totals_after(Varien_Event_Observer $observer) 
     {        
@@ -49,6 +49,7 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
      * Adds codFee to order
      * 
      * @param Varien_Event_Observer $observer
+     * @return Phoenix_CashOnDelivery_Model_Observer
      */
     public function sales_order_payment_place_end(Varien_Event_Observer $observer) 
     {        
@@ -74,12 +75,13 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
     }
 
     /**
-     * Performs order_creage_loadBlock response update
+     * Performs order_create_loadBlock response update
      * adds totals block to each response
-     * This function is depricated, the totals block update is implemented
+     * This function is deprecated, the totals block update is implemented
      * in phoenix/cashondelivery/sales.js (SalesOrder class extension)
      * 
      * @param Varien_Event_Observer $observer
+     * @return Phoenix_CashOnDelivery_Model_Observer
      */
     public function controller_action_layout_load_before(Varien_Event_Observer $observer) 
     {        

@@ -15,12 +15,14 @@
  * @category   Phoenix
  * @package    Phoenix_CashOnDelivery
  * @copyright  Copyright (c) 2008-2009 Andrej Sinicyn, Mik3e
- * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright  Copyright (c) 2010 - 2013 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Method_Abstract
 {
+    const XML_CONFIG_PATH_CASHONDELIVERY_COST_TYPE = 'payment/phoenix_cashondelivery/cost_type';
+
     /**
     * unique internal payment method identifier
     *
@@ -32,21 +34,49 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     protected $_formBlockType = 'phoenix_cashondelivery/form';
     protected $_infoBlockType = 'phoenix_cashondelivery/info';
 
-    public function getCODTitle()
+    /**
+     * Get the configured inland fee.
+     * If percentage is configured we calculate it from the configured address attribute.
+     *
+     * @param Mage_Customer_Model_Address_Abstract|null $address
+     * @return float
+     */
+    public function getInlandCosts($address = null)
     {
-        return $this->getConfigData('title');
+        $inlandCost = $this->getConfigData('inlandcosts');
+
+        if (is_object($address) && Mage::getStoreConfigFlag(self::XML_CONFIG_PATH_CASHONDELIVERY_COST_TYPE)) {
+            $calcBase   = $this->getConfigData('cost_calc_base');
+            $inlandCost = ($address->getData($calcBase) / 100) * $inlandCost;
+        }
+
+        return floatval($inlandCost);
     }
 
-    public function getInlandCosts()
+    /**
+     * Get the configured foreign country fee.
+     * If percentage is configured we calculate it from the configured address attribute.
+     *
+     * @param Mage_Customer_Model_Address_Abstract|null $address
+     * @return float
+     */
+    public function getForeignCountryCosts($address = null)
     {
-        return floatval($this->getConfigData('inlandcosts'));
+        $foreignCost = $this->getConfigData('foreigncountrycosts');
+
+        if (is_object($address) && Mage::getStoreConfigFlag(self::XML_CONFIG_PATH_CASHONDELIVERY_COST_TYPE)) {
+            $calcBase   = $this->getConfigData('cost_calc_base');
+            $foreignCost = ($address->getData($calcBase) / 100) * $foreignCost;
+        }
+
+        return floatval($foreignCost);
     }
 
-    public function getForeignCountryCosts()
-    {
-        return floatval($this->getConfigData('foreigncountrycosts'));
-    }
-
+    /**
+     * Returns an configured custom text which is used to show additional information to the customer.
+     *
+     * @return string
+     */
     public function getCustomText()
     {
         return $this->getConfigData('customtext');
@@ -55,19 +85,27 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     /**
      * Returns COD fee for certain address
      *
-     * @param Mage_Sales_Model_Quote_Address $address
-     * @return decimal
-     *
+     * @param Mage_Customer_Model_Address_Abstract $address
+     * @return float
      */
     public function getAddressCosts(Mage_Customer_Model_Address_Abstract $address)
     {
         if ($address->getCountry() == Mage::getStoreConfig('shipping/origin/country_id')) {
-            return $this->getInlandCosts();
+            return $this->getInlandCosts($address);
+
         } else {
-            return $this->getForeignCountryCosts();
+            return $this->getForeignCountryCosts($address);
         }
     }
 
+    /**
+     * Returns the payment fee excluding the tax.
+     *
+     * @param Mage_Customer_Model_Address_Abstract $address
+     * @param null|float $value
+     * @param bool $alreadyExclTax
+     * @return float|null
+     */
     public function getAddressCodFee(Mage_Customer_Model_Address_Abstract $address, $value = null, $alreadyExclTax = false)
     {
         $helper = Mage::helper('phoenix_cashondelivery');
@@ -84,6 +122,14 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
         return $value;
     }
 
+    /**
+     * Returns the tax for the payment fee.
+     *
+     * @param Mage_Customer_Model_Address_Abstract $address
+     * @param null|float $value
+     * @param bool $alreadyExclTax
+     * @return int|float
+     */
     public function getAddressCodTaxAmount(Mage_Customer_Model_Address_Abstract $address, $value = null, $alreadyExclTax = false)
     {
         $helper = Mage::helper('phoenix_cashondelivery');
@@ -105,9 +151,10 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     /**
      * Return true if the method can be used at this time
      *
+     * @param Mage_Sales_Model_Quote|null $quote
      * @return bool
      */
-    public function isAvailable($quote=null)
+    public function isAvailable($quote = null)
     {
         if (!parent::isAvailable($quote)) {
             return false;

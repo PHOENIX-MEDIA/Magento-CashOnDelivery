@@ -61,7 +61,7 @@
                             <label>Display Zero Fee</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>11</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -69,7 +69,7 @@
                         <title translate="label">
                             <label>Title</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>20</sort_order>
+                            <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -112,7 +112,7 @@
                         <min_order_total translate="label">
                             <label>Minimum Order Total</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>74</sort_order>
+                            <sort_order>80</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -120,15 +120,36 @@
                         <max_order_total translate="label">
                             <label>Maximum Order Total</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>78</sort_order>
+                            <sort_order>90</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </max_order_total>
+                        <cost_type translate="label">
+                            <label>Cost calculation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>phoenix_cashondelivery/source_costType</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cost_type>
+                        <cost_calc_base>
+                            <label>Cost calculation base</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.</comment>
+                            <depends>
+                                <cost_type>1</cost_type>
+                            </depends>
+                        </cost_calc_base>
                         <inlandcosts translate="label">
                             <label>Costs for inland shipping</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>80</sort_order>
+                            <sort_order>120</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -136,15 +157,15 @@
                         <foreigncountrycosts translate="label">
                             <label>Costs for shipping to foreign countries</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>90</sort_order>
+                            <sort_order>130</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </foreigncountrycosts>
                         <customtext translate="label">
                             <label>Custom text for checkout page</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>100</sort_order>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>140</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -152,7 +173,7 @@
                         <disallowspecificshippingmethods translate="label">
                             <label>Disallow specific shipping methods</label>
                             <frontend_type>select</frontend_type>
-                            <sort_order>110</sort_order>
+                            <sort_order>150</sort_order>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -161,11 +182,14 @@
                         <disallowedshippingmethods translate="label">
                             <label>Disallowed shipping methods</label>
                             <frontend_type>multiselect</frontend_type>
-                            <sort_order>120</sort_order>
+                            <sort_order>160</sort_order>
                             <source_model>phoenix_cashondelivery/source_availableShipmentMethods</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends>
+                                <disallowspecificshippingmethods>1</disallowspecificshippingmethods>
+                            </depends>
                         </disallowedshippingmethods>                        
                     </fields>
                 </phoenix_cashondelivery>
