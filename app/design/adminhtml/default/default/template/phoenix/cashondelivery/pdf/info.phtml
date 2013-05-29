@@ -30,11 +30,11 @@
         if (!is_null($_extra_fee_excl)):
             $_codFeeStr = $_extra_fee_excl;
             if ($this->helper('phoenix_cashondelivery')->displayCodBothPrices() && ($_extra_fee_incl != $_extra_fee_excl)) {
-                        $_codFeeStr .= ' ('.$this->__('Incl. Tax').' '.$_extra_fee_incl.')';
+                        $_codFeeStr .= '{{pdf_row_separator}}('.$this->__('Incl. Tax').' '.$_extra_fee_incl.')';
             }
     ?>
 
     <?php if((float)$this->getRawCodFee() || Mage::getStoreConfig('payment/phoenix_cashondelivery/display_zero_fee')): ?>
-    <?php echo $this->__('Cash on Delivery fee %s', $_codFeeStr) ?>
+    <?php echo $this->__('Cash on Delivery fee %s', strip_tags($_codFeeStr)) ?>
     <?php endif; ?>
 <?php endif; ?>
