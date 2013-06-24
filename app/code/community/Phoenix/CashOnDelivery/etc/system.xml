@@ -108,6 +108,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends>
+                                <shippingallowspecific>1</shippingallowspecific>
+                            </depends>
                         </shippingspecificcountry>
                         <min_order_total translate="label">
                             <label>Minimum Order Total</label>

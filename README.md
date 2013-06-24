@@ -1,21 +1,43 @@
 CashOnDelivery
 ==============
 
-*Attention:* From version 0.4 only Magento >=1.4.0 is supported. If you use Magento < 1.4 switch to the "Releases" tab and choose the extension key of the last 0.3.x version which supports previous Magento releases.
+*Attention:* From version 0.4 only Magento >= 1.4.0 is supported. If you use Magento < 1.4 go to Magento Connect, switch to the "Releases" tab and choose the extension key of the last 0.3.x version which supports previous Magento releases.
+From version 1.0.7 only Magento >= 1.5.0 is supported.
 
-This extension is maintained by PHOENIX MEDIA, Magento Gold Partner in Stuttgart and Vienna.
+This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), Magento Gold Partner in Stuttgart and Vienna.
  
 
 Changelog
 ---------
 
-From version 1.4.1 on all changes are listed in the "Release Notes" tab
+1.0.8
+- Refactored the totals handling and added CoD totals to creditmemos and guest orders
+- Added composer and readme files
+
+1.0.7
+- Fixed typo and visible HTML Tag in the invoice PDF
+- Added option for an percentage fee
+- Refactored the module to an own namespace to prevent problems with Magento native cash on delivery payment method
+- Added Modman module description file
+
+1.0.6
+- Some cosmetic improvements
+
+1.0.5
+- added min/max order amount config option
+- fixed some translations oddities
+
+1.0.4
+- made COD fee available in "Checkout Totals Sort Order" tab
+
+1.0.3
+- added missing totals in invoice
 
 1.0.2:
 - Fixed missing COD Tax Fee for invoices containing configurable products
 
 1.0.1:
-- Fixed wrong COD fee displaying on order info block when "Display Cod Fee" optionis set to "Including Tax" 
+- Fixed wrong COD fee displaying on order info block when "Display Cod Fee" options set to "Including Tax"
 
 1.0.0:
 - Version 0.4.8 is considered as stable. 

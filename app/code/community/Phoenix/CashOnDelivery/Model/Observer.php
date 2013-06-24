@@ -97,4 +97,46 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
         return $this;
     }
 
+    /**
+     * When the order gets canceled we put the Cash on Delivery fee and tax also in the canceled columns.
+     *
+     * @param Varien_Event_Observer $observer
+     * @return Phoenix_CashOnDelivery_Model_Observer
+     */
+    public function order_cancel_after(Varien_Event_Observer $observer)
+    {
+        $order = $observer->getEvent()->getOrder();
+
+        if ($order->getPayment()->getMethodInstance()->getCode() != 'phoenix_cashondelivery') {
+            return $this;
+        }
+
+        $codFee     = $order->getCodFee();
+        $baseCodFee = $order->getBaseCodFee();
+        $codTax     = $order->getCodTaxAmount();
+        $baseCodTax = $order->getBaseCodTaxAmount();
+
+        $codFeeInvoiced     = $order->getCodFeeInvoiced();
+
+        if ($codFeeInvoiced) {
+            $baseCodFeeInvoiced = $order->getBaseCodFeeInvoiced();
+            $codTaxInvoiced     = $order->getCodTaxAmountInvoiced();
+            $baseCodTaxInvoiced = $order->getBaseCodTaxAmountInvoiced();
+
+            $codFee     = $codFee     - $codFeeInvoiced;
+            $baseCodFee = $baseCodFee - $baseCodFeeInvoiced;
+            $codTax     = $codTax     - $codTaxInvoiced;
+            $baseCodTax = $baseCodTax - $baseCodTaxInvoiced;
+        }
+
+        if ($baseCodFee) {
+            $order->setCodFeeCanceled($codFee)
+                  ->setBaseCodFeeCanceled($baseCodFee)
+                  ->setCodTaxAmountCanceled($codTax)
+                  ->setBaseCodTaxAmountCanceled($baseCodTax)
+                  ->save();
+        }
+
+        return $this;
+    }
 }

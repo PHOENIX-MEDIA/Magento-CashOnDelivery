@@ -18,12 +18,8 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Phoenix_CashOnDelivery_Model_Quote_TaxTotal extends Mage_Sales_Model_Quote_Address_Total_Tax
+class Phoenix_CashOnDelivery_Model_Sales_Quote_TaxTotal extends Mage_Sales_Model_Quote_Address_Total_Tax
 {
-    const CONFIG_XML_PATH_COD_TAX_CLASS    = 'tax/classes/phoenix_cashondelivery_tax_class';
-    const CONFIG_XML_PATH_COD_INCLUDES_TAX = 'tax/calculation/phoenix_cashondelivery_includes_tax';
-    const CONFIG_XML_PATH_DISPLAY_COD      = 'tax/display/phoenix_cashondelivery_fee';
-
     public function collect(Mage_Sales_Model_Quote_Address $address)
     {
         $collection = $address->getQuote()->getPaymentsCollection();

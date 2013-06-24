@@ -18,17 +18,13 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Phoenix_CashOnDelivery_Model_Invoice_Total extends Mage_Sales_Model_Order_Invoice_Total_Abstract
+class Phoenix_CashOnDelivery_Model_Sales_Invoice_Total extends Mage_Sales_Model_Order_Invoice_Total_Abstract
 {
     public function collect(Mage_Sales_Model_Order_Invoice $invoice)
     {
         $order = $invoice->getOrder();
 
-        if ($order->getPayment()->getMethodInstance()->getCode() != 'phoenix_cashondelivery') {
-            return $this;
-        }
-
-        if (!$order->getCodFee()) {
+        if ($order->getPayment()->getMethodInstance()->getCode() != 'phoenix_cashondelivery' || !$order->getCodFee()) {
             return $this;
         }
 
@@ -50,10 +46,10 @@ class Phoenix_CashOnDelivery_Model_Invoice_Total extends Mage_Sales_Model_Order_
         }
 
         $baseCodFeeToInvoice = $baseCodFee - $baseCodFeeInvoiced;
-        $codFeeToInvoice     = $codFee - $codFeeInvoiced;
+        $codFeeToInvoice     = $codFee     - $codFeeInvoiced;
 
         $baseInvoiceTotal = $baseInvoiceTotal + $baseCodFeeToInvoice;
-        $invoiceTotal     = $invoiceTotal + $codFeeToInvoice;
+        $invoiceTotal     = $invoiceTotal     + $codFeeToInvoice;
 
         $invoice->setBaseGrandTotal($baseInvoiceTotal);
         $invoice->setGrandTotal($invoiceTotal);
@@ -61,8 +57,8 @@ class Phoenix_CashOnDelivery_Model_Invoice_Total extends Mage_Sales_Model_Order_
         $invoice->setBaseCodFee($baseCodFeeToInvoice);
         $invoice->setCodFee($codFeeToInvoice);
 
-        $order->setBaseCodFeeInvoiced($baseCodFeeInvoiced+$baseCodFeeToInvoice);
-        $order->setCodFeeInvoiced($codFeeInvoiced+$codFeeToInvoice);
+        $order->setBaseCodFeeInvoiced($baseCodFeeInvoiced + $baseCodFeeToInvoice);
+        $order->setCodFeeInvoiced($codFeeInvoiced         + $codFeeToInvoice);
 
         return $this;
     }

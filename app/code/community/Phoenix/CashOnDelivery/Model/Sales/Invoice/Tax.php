@@ -18,31 +18,38 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Phoenix_CashOnDelivery_Model_Invoice_Tax extends Mage_Sales_Model_Order_Invoice_Total_Abstract
+class Phoenix_CashOnDelivery_Model_Sales_Invoice_Tax extends Mage_Sales_Model_Order_Invoice_Total_Abstract
 {
     public function collect(Mage_Sales_Model_Order_Invoice $invoice)
     {
-        $codTax = 0;
-        $baseCodTax = 0;
-        $order = $invoice->getOrder();
-
+        $codTax        = 0;
+        $baseCodTax    = 0;
+        $order         = $invoice->getOrder();
         $includeCodTax = true;
+
+        if ($order->getPayment()->getMethodInstance()->getCode() != 'phoenix_cashondelivery') {
+            return $this;
+        }
+
         /**
          * Check Cod amount in previus invoices
          */
-        foreach ($invoice->getOrder()->getInvoiceCollection() as $previusInvoice) {
-            if ($previusInvoice->getCodFee() && !$previusInvoice->isCanceled()) {
+        foreach ($order->getInvoiceCollection() as $previousInvoice) {
+
+            if ($previousInvoice->getCodFee() && !$previousInvoice->isCanceled()) {
                 $includeCodTax = false;
             }
         }
 
         if ($includeCodTax) {
-            $codTax += $invoice->getOrder()->getCodTaxAmount();
-            $baseCodTax += $invoice->getOrder()->getBaseCodTaxAmount();
-            $invoice->setCodTaxAmount($invoice->getOrder()->getCodTaxAmount());
-            $invoice->setBaseCodTaxAmount($invoice->getOrder()->getBaseCodTaxAmount());
+            $codTax     = $order->getCodTaxAmount();
+            $baseCodTax = $order->getBaseCodTaxAmount();
+
+            $invoice->setCodTaxAmount($order->getCodTaxAmount());
+            $invoice->setBaseCodTaxAmount($order->getBaseCodTaxAmount());
+
             $invoice->getOrder()->setCodTaxAmountInvoiced($codTax);
-            $invoice->getOrder()->setBaseCodTaxAmountInvoice($baseCodTax);
+            $invoice->getOrder()->setBaseCodTaxAmountInvoiced($baseCodTax);
         }
 
         /**
@@ -50,12 +57,13 @@ class Phoenix_CashOnDelivery_Model_Invoice_Tax extends Mage_Sales_Model_Order_In
          * totalTax adjustment
          * check Mage_Sales_Model_Order_Invoice_Total_Tax::collect()
          */
-        $allowedTax     = $order->getTaxAmount() - $order->getTaxInvoiced();
+        $allowedTax     = $order->getTaxAmount()     - $order->getTaxInvoiced();
         $allowedBaseTax = $order->getBaseTaxAmount() - $order->getBaseTaxInvoiced();
-        $totalTax = $invoice->getTaxAmount();
-        $baseTotalTax = $invoice->getBaseTaxAmount();
-        if (!$invoice->isLast()
-                && $allowedTax > $totalTax) {
+
+        $totalTax       = $invoice->getTaxAmount();
+        $baseTotalTax   = $invoice->getBaseTaxAmount();
+
+        if (!$invoice->isLast() && $allowedTax > $totalTax) {
             $newTotalTax           = min($allowedTax, $totalTax + $codTax);
             $newBaseTotalTax       = min($allowedBaseTax, $baseTotalTax + $baseCodTax);
 

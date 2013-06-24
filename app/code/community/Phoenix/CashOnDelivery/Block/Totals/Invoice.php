@@ -18,22 +18,20 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Phoenix_CashOnDelivery_Block_Adminhtml_Sales_Order_Creditmemo_Totals_Cod extends Mage_Core_Block_Abstract
+class Phoenix_CashOnDelivery_Block_Totals_Invoice extends Phoenix_CashOnDelivery_Block_Totals_Abstract
 {
-    public function initTotals()
+    /**
+     * Set the correct parent block and the object from which we get / set our total data.
+     *
+     * @return Phoenix_CashOnDelivery_Block_Invoice_Totals_Cod
+     */
+    protected function _prepareTotals()
     {
-        $parent = $this->getParentBlock();
+        parent::_prepareTotals();
 
-        if ($this->_invoice->getCodFee()) {
+        $this->_parentBlock = $this->getParentBlock();
+        $this->_totalObject = $this->_parentBlock->getInvoice();
 
-            $cod = new Varien_Object();
-            $cod->setLabel($this->__('Refund Cash on Delivery fee'));
-            $cod->setValue($parent->getSource()->getCodFee());
-            $cod->setBaseValue($parent->getSource()->getBaseCodFee());
-            $cod->setCode('phoenix_cashondelivery_fee');
-
-            $parent->addTotalBefore($cod, 'adjustment_positive');
-        }
         return $this;
     }
 }

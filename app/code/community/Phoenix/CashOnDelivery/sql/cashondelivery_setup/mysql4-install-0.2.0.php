@@ -33,17 +33,8 @@ $eav->addAttribute('order', 'base_cod_fee', array('type' => 'decimal'));
 $eav->addAttribute('order', 'cod_fee_invoiced', array('type' => 'decimal',));
 $eav->addAttribute('order', 'base_cod_fee_invoiced', array('type' => 'decimal'));
 
-//$eav->addAttribute('order', 'cod_fee_refunded', array('type' => 'decimal',));
-//$eav->addAttribute('order', 'base_cod_fee_refunded', array('type' => 'decimal'));
-
-//$eav->addAttribute('order', 'cod_fee_canceled', array('type' => 'decimal',));
-//$eav->addAttribute('order', 'base_cod_fee_canceled', array('type' => 'decimal'));
-
 $eav->addAttribute('invoice', 'cod_fee', array('type' => 'decimal',));
 $eav->addAttribute('invoice', 'base_cod_fee', array('type' => 'decimal'));
-
-//$eav->addAttribute('creditmemo', 'cod_fee', array('type' => 'decimal',));
-//$eav->addAttribute('creditmemo', 'base_cod_fee', array('type' => 'decimal'));
 
 $this->endSetup();
 

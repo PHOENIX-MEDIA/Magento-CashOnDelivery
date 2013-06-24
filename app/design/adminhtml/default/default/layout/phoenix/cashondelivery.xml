@@ -23,45 +23,45 @@
 <layout>
     <adminhtml_sales_order_view>
         <reference name="order_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/order_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_order"/>
         </reference>
     </adminhtml_sales_order_view>
 
     <adminhtml_sales_order_invoice_view>
         <reference name="invoice_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/invoice_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_invoice"/>
         </reference>
     </adminhtml_sales_order_invoice_view>
 
     <adminhtml_sales_order_invoice_new>
         <reference name="invoice_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/invoice_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_invoice"/>
         </reference>
     </adminhtml_sales_order_invoice_new>
     
     <adminhtml_sales_order_invoice_updateqty>
         <reference name="invoice_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/invoice_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_invoice"/>
         </reference>
     </adminhtml_sales_order_invoice_updateqty>
 
     <adminhtml_sales_order_creditmemo_new>
-        <reference name="sales.order.view.totals.main">
-            <block type="adminhtml/sales_order_totals_item" name="phoenix_cashondelivery_fee" template="sales/order/totals/item.phtml" before="tax">
-                <action method="setSourceField"><value>phoenix_cashondelivery_fee</value></action>
-                <action method="setLabel"><value>Cash on Delivery Fee</value></action>
-            </block>
+        <reference name="creditmemo_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/adminhtml_sales_creditmemo_create_totals"/>
         </reference>
     </adminhtml_sales_order_creditmemo_new>
 
     <adminhtml_sales_order_creditmemo_view>
-        <reference name="sales.order.view.totals.main">
-            <block type="adminhtml/sales_order_totals_item" name="phoenix_cashondelivery_fee" template="sales/order/totals/item.phtml" before="tax">
-                <action method="setSourceField"><value>phoenix_cashondelivery_fee</value></action>
-                <action method="setLabel"><value>Cash on Delivery Fee</value></action>
-            </block>
+        <reference name="creditmemo_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_creditmemo"/>
         </reference>
     </adminhtml_sales_order_creditmemo_view>
+
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="creditmemo_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_creditmemo"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
 
     <adminhtml_sales_order_create_index>
         <reference name="head">

@@ -23,37 +23,91 @@
 <layout>
     <sales_order_print>
         <reference name="order_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/order_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_order"/>
         </reference>
     </sales_order_print>
 
     <sales_order_view>
         <reference name="order_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/order_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_order"/>
         </reference>
     </sales_order_view>
 
     <sales_order_invoice>
         <reference name="invoice_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/invoice_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_invoice"/>
         </reference>
     </sales_order_invoice>
 
     <sales_order_printinvoice>
         <reference name="invoice_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/invoice_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_invoice"/>
         </reference>
     </sales_order_printinvoice>
 
     <sales_email_order_items>
         <reference name="order_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/order_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_order"/>
         </reference>
     </sales_email_order_items>
 
     <sales_email_order_invoice_items>
         <reference name="invoice_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/invoice_totals_cod" before="tax"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_invoice"/>
         </reference>
     </sales_email_order_invoice_items>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_creditmemo"/>
+        </reference>
+    </sales_order_creditmemo>
+
+    <sales_order_printcreditmemo>
+        <reference name="creditmemo_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_creditmemo"/>
+        </reference>
+    </sales_order_printcreditmemo>
+
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_creditmemo"/>
+        </reference>
+    </sales_email_order_creditmemo_items>
+
+    <sales_guest_view>
+        <reference name="order_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_order"/>
+        </reference>
+    </sales_guest_view>
+
+    <sales_guest_print>
+        <reference name="order_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_order"/>
+        </reference>
+    </sales_guest_print>
+
+    <sales_guest_invoice>
+        <reference name="invoice_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_invoice"/>
+        </reference>
+    </sales_guest_invoice>
+
+    <sales_guest_printinvoice>
+        <reference name="invoice_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_invoice"/>
+        </reference>
+    </sales_guest_printinvoice>
+
+    <sales_guest_creditmemo>
+        <reference name="creditmemo_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_creditmemo"/>
+        </reference>
+    </sales_guest_creditmemo>
+
+    <sales_guest_printcreditmemo>
+        <reference name="creditmemo_totals">
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_creditmemo"/>
+        </reference>
+    </sales_guest_printcreditmemo>
 </layout>

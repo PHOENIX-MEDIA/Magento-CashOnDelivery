@@ -23,7 +23,7 @@
 <config>
     <modules>
         <Phoenix_CashOnDelivery>
-            <version>1.0.7</version>
+            <version>1.0.8</version>
         </Phoenix_CashOnDelivery>
     </modules>
 
@@ -63,14 +63,14 @@
             <quote>
                 <totals>
                     <phoenix_cashondelivery>
-                        <class>phoenix_cashondelivery/quote_total</class>
+                        <class>phoenix_cashondelivery/sales_quote_total</class>
                         <after>subtotal,discount,shipping</after>
                         <before>tax,grand_total</before>
                         <renderer>phoenix_cashondelivery/checkout_cod</renderer>
                         <admin_renderer>phoenix_cashondelivery/adminhtml_sales_order_create_totals_cod</admin_renderer>
                     </phoenix_cashondelivery>
                     <phoenix_cashondelivery_tax>
-                        <class>phoenix_cashondelivery/quote_taxTotal</class>
+                        <class>phoenix_cashondelivery/sales_quote_taxTotal</class>
                         <after>subtotal,discount,shipping,tax</after>
                         <before>grand_total</before>
                     </phoenix_cashondelivery_tax>
@@ -79,18 +79,29 @@
             <order_invoice>
                 <totals>
                     <phoenix_cashondelivery>
-                        <class>phoenix_cashondelivery/invoice_total</class>
+                        <class>phoenix_cashondelivery/sales_invoice_total</class>
+                        <after>subtotal,discount,shipping</after>
+                        <before>tax,grand_total</before>
                     </phoenix_cashondelivery>
                     <phoenix_cashondelivery_tax>
-                        <class>phoenix_cashondelivery/invoice_tax</class>
+                        <class>phoenix_cashondelivery/sales_invoice_tax</class>
+                        <after>subtotal,discount,shipping,tax</after>
+                        <before>grand_total</before>
                     </phoenix_cashondelivery_tax>
                 </totals>
             </order_invoice>
             <order_creditmemo>
                 <totals>
                     <phoenix_cashondelivery>
-                        <class>phoenix_cashondelivery/creditmemo_total</class>
+                        <class>phoenix_cashondelivery/sales_creditmemo_total</class>
+                        <after>subtotal,discount,shipping</after>
+                        <before>tax,grand_total</before>
                     </phoenix_cashondelivery>
+                    <phoenix_cashondelivery_tax>
+                        <class>phoenix_cashondelivery/sales_creditmemo_tax</class>
+                        <after>subtotal,discount,shipping,tax</after>
+                        <before>grand_total</before>
+                    </phoenix_cashondelivery_tax>
                 </totals>
             </order_creditmemo>
         </sales>
@@ -113,6 +124,15 @@
                     </phoenix_cashondelivery>
                 </observers>
             </sales_order_payment_place_end>
+            <order_cancel_after>
+                <observers>
+                    <phoenix_cashondelivery>
+                        <type>singleton</type>
+                        <class>phoenix_cashondelivery/observer</class>
+                        <method>order_cancel_after</method>
+                    </phoenix_cashondelivery>
+                </observers>
+            </order_cancel_after>
         </events>
         <pdf>
             <totals>
@@ -148,7 +168,7 @@
         </payment>
         <sales>
             <totals_sort>
-                <phoenix_cashondelivery>39</phoenix_cashondelivery>
+                <phoenix_cashondelivery>15</phoenix_cashondelivery>
                 <phoenix_cashondelivery_tax>97</phoenix_cashondelivery_tax>
             </totals_sort>
         </sales>
