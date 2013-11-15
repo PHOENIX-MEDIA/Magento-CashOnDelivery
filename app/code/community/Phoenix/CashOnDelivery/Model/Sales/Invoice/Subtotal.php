@@ -29,8 +29,6 @@ class Phoenix_CashOnDelivery_Model_Sales_Invoice_Subtotal extends Mage_Sales_Mod
         if ($order->getPayment()->getMethodInstance()->getCode() != 'phoenix_cashondelivery' || !$order->getCodFee()) {
             return $this;
         }
-    
-        $parent = parent::collect($invoice);
         
         $subtotal       = 0;
         $baseSubtotal   = 0;
