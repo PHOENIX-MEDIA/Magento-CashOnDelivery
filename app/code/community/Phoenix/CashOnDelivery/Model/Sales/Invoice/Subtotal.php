@@ -23,14 +23,19 @@ class Phoenix_CashOnDelivery_Model_Sales_Invoice_Subtotal extends Mage_Sales_Mod
 {
     public function collect(Mage_Sales_Model_Order_Invoice $invoice)
     {
+    
+		$order = $invoice->getOrder();
+        
+        if ($order->getPayment()->getMethodInstance()->getCode() != 'phoenix_cashondelivery' || !$order->getCodFee()) {
+            return $this;
+        }
+    
         $parent = parent::collect($invoice);
         
         $subtotal       = 0;
         $baseSubtotal   = 0;
         $subtotalInclTax= 0;
         $baseSubtotalInclTax = 0;
-
-        $order = $invoice->getOrder();
 
         foreach ($invoice->getAllItems() as $item) {
             if ($item->getOrderItem()->isDummy()) {
