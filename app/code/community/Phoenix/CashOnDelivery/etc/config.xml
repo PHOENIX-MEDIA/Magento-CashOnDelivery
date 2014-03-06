@@ -88,6 +88,9 @@
                         <after>subtotal,discount,shipping,tax</after>
                         <before>grand_total</before>
                     </phoenix_cashondelivery_tax>
+                    <phoenix_cashondelivery_subtotal>
+                      <class>phoenix_cashondelivery/sales_invoice_subtotal</class>
+                    </phoenix_cashondelivery_subtotal>
                 </totals>
             </order_invoice>
             <order_creditmemo>
