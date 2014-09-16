@@ -157,6 +157,17 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </inlandcosts>
+                        <mininlandcosts translate="label">
+                            <label>Costs for inland shipping (minimum)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>125</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <cost_type>1</cost_type>
+                            </depends>
+                        </mininlandcosts>
                         <foreigncountrycosts translate="label">
                             <label>Costs for shipping to foreign countries</label>
                             <frontend_type>text</frontend_type>
@@ -165,6 +176,17 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </foreigncountrycosts>
+                        <minforeigncountrycosts translate="label">
+                            <label>Costs for shipping to foreign countries (minimum)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>135</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <cost_type>1</cost_type>
+                            </depends>
+                        </minforeigncountrycosts>
                         <customtext translate="label">
                             <label>Custom text for checkout page</label>
                             <frontend_type>textarea</frontend_type>
