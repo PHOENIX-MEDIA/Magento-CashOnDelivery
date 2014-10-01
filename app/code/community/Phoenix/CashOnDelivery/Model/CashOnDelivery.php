@@ -44,10 +44,14 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     public function getInlandCosts($address = null)
     {
         $inlandCost = $this->getConfigData('inlandcosts');
+        $minInlandCost = $this->getConfigData('minimum_inlandcosts');
 
         if (is_object($address) && Mage::getStoreConfigFlag(self::XML_CONFIG_PATH_CASHONDELIVERY_COST_TYPE)) {
             $calcBase   = $this->getConfigData('cost_calc_base');
             $inlandCost = ($address->getData($calcBase) / 100) * $inlandCost;
+            if ($inlandCost < $minInlandCost) {
+                $inlandCost = $minInlandCost;
+            }
         }
 
         return floatval($inlandCost);
@@ -63,10 +67,14 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     public function getForeignCountryCosts($address = null)
     {
         $foreignCost = $this->getConfigData('foreigncountrycosts');
+        $minForeignCost = $this->getConfigData('minimum_foreigncountrycosts');
 
         if (is_object($address) && Mage::getStoreConfigFlag(self::XML_CONFIG_PATH_CASHONDELIVERY_COST_TYPE)) {
             $calcBase   = $this->getConfigData('cost_calc_base');
             $foreignCost = ($address->getData($calcBase) / 100) * $foreignCost;
+            if ($foreignCost < $minForeignCost) {
+                $foreignCost = $minForeignCost;
+            }
         }
 
         return floatval($foreignCost);
