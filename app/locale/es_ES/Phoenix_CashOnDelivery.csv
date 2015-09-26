@@ -18,3 +18,4 @@
 "Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.","Por favor, introduzca un código de atributo sales_flat_quote_address cuyo valor se toma como base para calcular los costes."
 "Refund Cash on Delivery fee","Reintegro de recargo por contrareembolso"
 "Disallow specific shipping methods","Excluir métodos de entrega específicos"
+"Disallowed shipping methods","Métodos de entrega excludidos"

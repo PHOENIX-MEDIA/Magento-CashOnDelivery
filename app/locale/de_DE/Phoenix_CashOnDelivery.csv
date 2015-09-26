@@ -18,3 +18,4 @@
 "Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.","Bitte geben Sie hier ein Schlüsselmerkmal sales_flat_quote_address ein, dessen Wert als Basis für die prozentuale Kostenrechnung genommen wird."
 "Refund Cash on Delivery fee","Nachnahmegebühr erstatten"
 "Disallow specific shipping methods","Bestimmte Versandmethoden ausschließen"
+"Disallowed shipping methods","Ausgeschlossene Versandmethoden"

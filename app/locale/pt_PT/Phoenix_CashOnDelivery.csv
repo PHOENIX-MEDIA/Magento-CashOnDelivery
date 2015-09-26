@@ -17,3 +17,5 @@
 "Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.","Por favor, introduza o código de atributo sales_flat_quote_address cujo valor é tomado como base para o cálculo dos custos."
 "Refund Cash on Delivery fee","Reembolso em dinheiro na taxa de entrega"
 "You will be charged an extra fee of %s.","Será cobrada uma taxa extra de %s."
+"Disallow specific shipping methods","Excluir métodos específicos de entrega"
+"Disallowed shipping methods","Métodos de entrega excludidos"
