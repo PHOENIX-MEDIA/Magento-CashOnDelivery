@@ -14,6 +14,6 @@
 "Fixed","Fixo"
 "Incl. Tax","Impostos incluídos"
 "Percentage","Percentagem"
-"Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.","Por favor, indique um código de atributo sales_flat_quote_address que será tomado como base para o cálculo do custo."
+"Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.","Por favor, introduza o código de atributo sales_flat_quote_address cujo valor é tomado como base para o cálculo dos custos."
 "Refund Cash on Delivery fee","Reembolso em dinheiro na taxa de entrega"
 "You will be charged an extra fee of %s.","Será cobrada uma taxa extra de %s."
