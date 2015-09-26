@@ -1,14 +1,39 @@
 {
     "name": "phoenix-media/magento-cashondelivery",
-    "description": "Phoenix media cash on delivery",
+    "description": "PHOENIX MEDIA - Cash On Delivery",
     "type": "magento-module",
     "authors": [
         {
-            "name": "Phoenix Media",
+            "name": "PHOENIX MEDIA",
             "email": "info@phoenixmedia.com"
         }
     ],
-    "require": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+  "homepage": "https://github.com/PHOENIX-MEDIA/Magento-CashOnDelivery",
+  "require": {
+    "magento-hackathon/magento-composer-installer": "*"
+  },
+  "extra": {
+    "magento-root-dir": "./",
+    "magento-deploystrategy": "copy",
+    "map": [
+      ["./app/code/community/Phoenix/CashOnDelivery/*", "./app/code/community/Phoenix/CashOnDelivery/"],
+      ["./app/etc/modules/Phoenix_CashOnDelivery.xml", "./app/etc/modules/Phoenix_CashOnDelivery.xml"],
+      ["./app/design/adminhtml/default/default/layout/phoenix/cashondelivery.xml", "./app/design/adminhtml/default/default/layout/phoenix/cashondelivery.xml"],
+      ["./app/design/adminhtml/default/default/template/phoenix/cashondelivery/*", "./app/design/adminhtml/default/default/template/phoenix/cashondelivery/"],
+      ["./app/design/frontend/base/default/layout/phoenix/cashondelivery.xml", "./app/design/frontend/base/default/layout/phoenix/cashondelivery.xml"],
+      ["./app/design/frontend/base/default/template/phoenix/cashondelivery/*", "./app/design/frontend/base/default/template/phoenix/cashondelivery/"],
+      ["./js/phoenix/cashondelivery/*", "./js/phoenix/cashondelivery/"],
+      ["./app/locale/de_DE/Phoenix_CashOnDelivery.csv", "./app/locale/de_DE/Phoenix_CashOnDelivery.csv"],
+      ["./app/locale/el_GR/Phoenix_CashOnDelivery.csv", "./app/locale/el_GR/Phoenix_CashOnDelivery.csv"],
+      ["./app/locale/en_US/Phoenix_CashOnDelivery.csv", "./app/locale/en_US/Phoenix_CashOnDelivery.csv"],
+      ["./app/locale/es_ES/Phoenix_CashOnDelivery.csv", "./app/locale/es_ES/Phoenix_CashOnDelivery.csv"],
+      ["./app/locale/it_IT/Phoenix_CashOnDelivery.csv", "./app/locale/it_IT/Phoenix_CashOnDelivery.csv"],
+      ["./app/locale/nb_NO/Phoenix_CashOnDelivery.csv", "./app/locale/nb_NO/Phoenix_CashOnDelivery.csv"],
+      ["./app/locale/pl_PL/Phoenix_CashOnDelivery.csv", "./app/locale/pl_PL/Phoenix_CashOnDelivery.csv"],
+      ["./app/locale/pt_PT/Phoenix_CashOnDelivery.csv", "./app/locale/pt_PT/Phoenix_CashOnDelivery.csv"]
+    ]
+  },
+  "config": {
+    "preferred-install": "dist"
+  }
 }
