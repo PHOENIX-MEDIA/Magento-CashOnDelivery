@@ -25,6 +25,7 @@
       ["./js/phoenix/cashondelivery/*", "./js/phoenix/cashondelivery/"],
       ["./app/locale/de_DE/Phoenix_CashOnDelivery.csv", "./app/locale/de_DE/Phoenix_CashOnDelivery.csv"],
       ["./app/locale/el_GR/Phoenix_CashOnDelivery.csv", "./app/locale/el_GR/Phoenix_CashOnDelivery.csv"],
+      ["./app/locale/en_GB/Phoenix_CashOnDelivery.csv", "./app/locale/en_GB/Phoenix_CashOnDelivery.csv"],
       ["./app/locale/en_US/Phoenix_CashOnDelivery.csv", "./app/locale/en_US/Phoenix_CashOnDelivery.csv"],
       ["./app/locale/es_ES/Phoenix_CashOnDelivery.csv", "./app/locale/es_ES/Phoenix_CashOnDelivery.csv"],
       ["./app/locale/it_IT/Phoenix_CashOnDelivery.csv", "./app/locale/it_IT/Phoenix_CashOnDelivery.csv"],

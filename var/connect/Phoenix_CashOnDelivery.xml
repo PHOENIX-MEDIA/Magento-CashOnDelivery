@@ -68,6 +68,7 @@
          <target>magelocale</target>
          <target>magelocale</target>
          <target>magelocale</target>
+         <target>magelocale</target>
          <target>magedesign</target>
          <target>magedesign</target>
          <target>magedesign</target>
@@ -81,6 +82,7 @@
          <path>de_DE/Phoenix_CashOnDelivery.csv</path>
          <path>el_GR/Phoenix_CashOnDelivery.csv</path>
          <path>en_US/Phoenix_CashOnDelivery.csv</path>
+         <path>en_GB/Phoenix_CashOnDelivery.csv</path>
          <path>es_ES/Phoenix_CashOnDelivery.csv</path>
          <path>it_IT/Phoenix_CashOnDelivery.csv</path>
          <path>nb_NO/Phoenix_CashOnDelivery.csv</path>
@@ -95,6 +97,7 @@
       <type>
          <type>file</type>
          <type>dir</type>
+         <type>file</type>
          <type>file</type>
          <type>file</type>
          <type>file</type>
@@ -127,9 +130,11 @@
          <include/>
          <include/>
          <include/>
+         <include/>
       </include>
       <ignore>
          <ignore/>
+         <ignore>#^.DS_Store#</ignore>
          <ignore>#^.DS_Store#</ignore>
          <ignore>#^.DS_Store#</ignore>
          <ignore>#^.DS_Store#</ignore>
