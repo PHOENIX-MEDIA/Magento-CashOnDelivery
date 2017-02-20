@@ -10,6 +10,13 @@ This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), M
 Changelog
 ---------
 
+1.0.9
+- Fixed "Display Zero Fee" in customer account order view" (Thanks to [idziakjakub](https://github.com/idziakjakub))
+- Fixed "Add Create Invoice Option - Add ability to configure that a cash on delivery order automatically create an invoice." (Thanks to [Flipmediaco](https://github.com/Flipmediaco))
+- "SR-714 allow capture offline" (Thanks to Pascal Querner)
+- "add cod_fee, base_cod_fee attributes to webservices" (Thanks to [tawfekov](https://github.com/tawfekov))
+- "add some local entries" (Thanks to MaWoScha)
+
 1.0.8
 - Refactored the totals handling and added CoD totals to creditmemos and guest orders
 - Added composer and readme files
