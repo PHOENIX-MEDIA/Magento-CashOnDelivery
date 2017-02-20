@@ -31,6 +31,9 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     protected $_code                    = 'phoenix_cashondelivery';
     protected $_canUseForMultishipping  = false;
 
+    protected $_canCapture        = true;
+    protected $_canCapturePartial = true;
+
     protected $_formBlockType = 'phoenix_cashondelivery/form';
     protected $_infoBlockType = 'phoenix_cashondelivery/info';
 
