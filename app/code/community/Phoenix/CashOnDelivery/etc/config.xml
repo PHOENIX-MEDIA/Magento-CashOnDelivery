@@ -23,7 +23,7 @@
 <config>
     <modules>
         <Phoenix_CashOnDelivery>
-            <version>1.0.8</version>
+            <version>1.0.9</version>
         </Phoenix_CashOnDelivery>
     </modules>
 
@@ -136,6 +136,15 @@
                     </phoenix_cashondelivery>
                 </observers>
             </order_cancel_after>
+            <sales_order_place_after>
+                <observers>
+                    <phoenix_cashondelivery>
+                        <type>singleton</type>
+                        <class>phoenix_cashondelivery/observer</class>
+                        <method>invoice_cashondelivery</method>
+                    </phoenix_cashondelivery>
+                </observers>
+            </sales_order_place_after>
         </events>
         <pdf>
             <totals>
