@@ -50,6 +50,11 @@
             </cashondelivery_read>
         </resources>
         <helpers>
+            <tax>
+                <rewrite>
+                    <data>Phoenix_CashOnDelivery_Helper_Tax</data>
+                </rewrite>
+            </tax>
             <phoenix_cashondelivery>
                 <class>Phoenix_CashOnDelivery_Helper</class>
             </phoenix_cashondelivery>
