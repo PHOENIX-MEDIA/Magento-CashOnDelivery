@@ -34,6 +34,8 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     protected $_formBlockType = 'phoenix_cashondelivery/form';
     protected $_infoBlockType = 'phoenix_cashondelivery/info';
 
+    protected $_costCalcBase = 'subtotal';
+
     /**
      * Get the configured inland fee.
      * If percentage is configured we calculate it from the configured address attribute.
@@ -43,18 +45,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      */
     public function getInlandCosts($address = null)
     {
-        $inlandCost = $this->getConfigData('inlandcosts');
-        $minInlandCost = $this->getConfigData('minimum_inlandcosts');
-
-        if (is_object($address) && Mage::getStoreConfigFlag(self::XML_CONFIG_PATH_CASHONDELIVERY_COST_TYPE)) {
-            $calcBase   = $this->getConfigData('cost_calc_base');
-            $inlandCost = ($address->getData($calcBase) / 100) * $inlandCost;
-            if ($inlandCost < $minInlandCost) {
-                $inlandCost = $minInlandCost;
-            }
-        }
-
-        return floatval($inlandCost);
+        return $this->getCosts($address, 'inlandcosts');
     }
 
     /**
@@ -66,18 +57,29 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      */
     public function getForeignCountryCosts($address = null)
     {
-        $foreignCost = $this->getConfigData('foreigncountrycosts');
-        $minForeignCost = $this->getConfigData('minimum_foreigncountrycosts');
+        return $this->getCosts($address, 'foreigncosts');
+    }
+
+    /**
+     * Get the cash on delivery fee based on the address and its type (inland or foreign)
+     *
+     * @param Mage_Customer_Model_Address_Abstract|null $address
+     * @param string $type One of 'inlandcosts' or 'foreigncosts'
+     * @return float
+     */
+    public function getCosts($address, $type)
+    {
+        $cost = $this->getConfigData($type);
+        $minCost = $this->getConfigData("minimum_$type");
 
         if (is_object($address) && Mage::getStoreConfigFlag(self::XML_CONFIG_PATH_CASHONDELIVERY_COST_TYPE)) {
-            $calcBase   = $this->getConfigData('cost_calc_base');
-            $foreignCost = ($address->getData($calcBase) / 100) * $foreignCost;
-            if ($foreignCost < $minForeignCost) {
-                $foreignCost = $minForeignCost;
+            $cost = ($address->getData($this->_costCalcBase) / 100) * $cost;
+            if ($cost < $minCost) {
+                $cost = $minCost;
             }
         }
 
-        return floatval($foreignCost);
+        return floatval($cost);
     }
 
     /**

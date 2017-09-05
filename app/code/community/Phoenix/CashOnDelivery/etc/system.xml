@@ -137,18 +137,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </cost_type>
-                        <cost_calc_base>
-                            <label>Cost calculation base</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>110</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                            <comment>Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.</comment>
-                            <depends>
-                                <cost_type>1</cost_type>
-                            </depends>
-                        </cost_calc_base>
                         <inlandcosts translate="label">
                             <label>Costs for inland shipping</label>
                             <frontend_type>text</frontend_type>
