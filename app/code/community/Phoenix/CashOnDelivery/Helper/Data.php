@@ -23,9 +23,9 @@ class Phoenix_CashOnDelivery_Helper_Data extends Mage_Core_Helper_Data
     /**
      * Config path constants
      */
-    const CONFIG_XML_PATH_COD_TAX_CLASS    = 'tax/classes/phoenix_cashondelivery_tax_class';
+    const CONFIG_XML_PATH_COD_TAX_CLASS = 'tax/classes/phoenix_cashondelivery_tax_class';
     const CONFIG_XML_PATH_COD_INCLUDES_TAX = 'tax/calculation/phoenix_cashondelivery_includes_tax';
-    const CONFIG_XML_PATH_DISPLAY_COD      = 'tax/display/phoenix_cashondelivery_fee';
+    const CONFIG_XML_PATH_DISPLAY_COD = 'tax/display/phoenix_cashondelivery_fee';
 
 
     /**
@@ -54,7 +54,7 @@ class Phoenix_CashOnDelivery_Helper_Data extends Mage_Core_Helper_Data
      */
     public function codPriceIncludesTax($store = null)
     {
-        $store   = Mage::app()->getStore($store);
+        $store = Mage::app()->getStore($store);
         $storeId = $store->getId();
 
         if (!isset($this->_codPriceIncludesTax[$storeId])) {
@@ -74,24 +74,28 @@ class Phoenix_CashOnDelivery_Helper_Data extends Mage_Core_Helper_Data
         return (int)Mage::getStoreConfig(self::CONFIG_XML_PATH_COD_TAX_CLASS, $store);
     }
 
-    public function getCodPrice($price, $includingTax = null, $shippingAddress = null, $ctc = null, $store = null)
+    public function getCodPrice($price, $includingTax = null, $shippingAddress = null, $source = null, $store = null)
     {
-        $billingAddress = false;
-        if ($shippingAddress && $shippingAddress->getQuote() && $shippingAddress->getQuote()->getBillingAddress()) {
-            $billingAddress = $shippingAddress->getQuote()->getBillingAddress();
+        if ($source === null) {
+            $source = $shippingAddress->getQuote();
         }
-        
+
+        $billingAddress = false;
+        if ($source && $source->getBillingAddress()) {
+            $billingAddress = $source->getBillingAddress();
+        }
+
         $calc = Mage::getSingleton('tax/calculation');
         $taxRequest = $calc->getRateRequest(
             $shippingAddress,
             $billingAddress,
-            $shippingAddress->getQuote()->getCustomerTaxClassId(),
+            $source->getCustomerTaxClassId(),
             $store
         );
         $taxRequest->setProductClassId($this->getCodTaxClass($store));
         $rate = $calc->getRate($taxRequest);
         $tax = $calc->calcTaxAmount($price, $rate, $this->codPriceIncludesTax($store), true);
-        
+
         if ($this->codPriceIncludesTax($store)) {
             return $includingTax ? $price : $price - $tax;
         } else {
@@ -135,15 +139,15 @@ class Phoenix_CashOnDelivery_Helper_Data extends Mage_Core_Helper_Data
     {
         if (!$this->_getTotalAfterPosition) {
 
-            $config      = Mage::app()->getConfig()->getXpath('//sales/totals_sort');
-            $positions   = end($config);
-            $positions   = $positions->asArray();
-            $codPos      = $positions['phoenix_cashondelivery'];
+            $config = Mage::app()->getConfig()->getXpath('//sales/totals_sort');
+            $positions = end($config);
+            $positions = $positions->asArray();
+            $codPos = $positions['phoenix_cashondelivery'];
             $beforeTotal = 'subtotal';
 
             asort($positions);
 
-            while($val = current($positions)) {
+            while ($val = current($positions)) {
                 if ($val == $codPos) {
                     prev($positions);
                     $beforeTotal = key($positions);
@@ -155,5 +159,59 @@ class Phoenix_CashOnDelivery_Helper_Data extends Mage_Core_Helper_Data
         }
 
         return $this->_getTotalAfterPosition;
+    }
+
+    public function getCodTaxAmount(Mage_Sales_Model_Order $order, $fee)
+    {
+        $collection = $order->getPaymentsCollection();
+        if ($collection->count() <= 0 || $order->getPayment()->getMethod() == null) {
+            return $this;
+        }
+
+        $paymentMethod = $order->getPayment()->getMethodInstance();
+
+        if ($paymentMethod->getCode() != 'phoenix_cashondelivery') {
+            return $this;
+        }
+
+        $store = $order->getStore();
+
+        $items = $order->getAllItems();
+        if (!count($items)) {
+            return $this;
+        }
+
+        $custTaxClassId = $order->getCustomerTaxClassId();
+
+        $taxCalculationModel = Mage::getSingleton('tax/calculation');
+        /* @var $taxCalculationModel Mage_Tax_Model_Calculation */
+        $request = $taxCalculationModel->getRateRequest(
+            $order->getShippingAddress(),
+            $order->getBillingAddress(),
+            $custTaxClassId,
+            $store
+        );
+        $codTaxClass = Mage::helper('phoenix_cashondelivery')->getCodTaxClass($store);
+
+        $codBaseTax = 0;
+
+        if ($codTaxClass) {
+            if ($rate = $taxCalculationModel->getRate($request->setProductClassId($codTaxClass))) {
+                if (!Mage::helper('phoenix_cashondelivery')->codPriceIncludesTax()) {
+                    $codBaseTax = $fee * $rate / 100;
+                } else {
+                    $codBaseTax = $fee / ($rate + 100) * $rate;
+                }
+
+                $codBaseTax = $store->roundPrice($codBaseTax);
+            }
+        }
+
+        return $codBaseTax;
+    }
+
+    public function getBaseRatio($order)
+    {
+        return $order->getCodFee() / $order->getBaseCodFee();
     }
 }

@@ -28,35 +28,42 @@ class Phoenix_CashOnDelivery_Model_Sales_Creditmemo_Tax extends Mage_Sales_Model
             return $this;
         }
 
+        $baseCodFee = $creditmemo->getBaseCodFee() + $creditmemo->getBaseCodTaxAmount();
+        $codFee = $creditmemo->getCodFee() + $creditmemo->getCodTaxAmount();
+
         $creditmemoBaseGrandTotal = $creditmemo->getBaseGrandTotal();
         $creditmemoGrandTotal     = $creditmemo->getGrandTotal();
-        $creditmemoBaseTaxAmount  = $creditmemo->getBaseTaxAmount();
-        $creditmemoTaxAmount      = $creditmemo->getTaxAmount();
-
         $baseCodTaxAmountRefunded = $order->getBaseCodTaxAmountRefunded();
-        $codTaxAmountRefunded     = $order->getCodTaxAmountRefunded();
+        $codTaxAmountRefunded = $order->getCodTaxAmountRefunded();
+        $creditmemoBaseTaxAmount = $creditmemo->getBaseTaxAmount();
+        $creditmemoTaxAmount = $creditmemo->getTaxAmount();
 
-        $baseCodTaxAmountInvoiced = $order->getBaseCodTaxAmountInvoiced();
-        $codTaxAmountInvoiced     = $order->getCodTaxAmountInvoiced();
+        $baseCodTaxToRefund = $this->_getCodTax($order, $baseCodFee);
+        $codTaxToRefund = $this->_getCodTax($order, $codFee);
 
-        $baseCodTaxAmountToRefund = abs($baseCodTaxAmountInvoiced - $baseCodTaxAmountRefunded);
-        $codTaxAmountToRefund     = abs($codTaxAmountInvoiced     - $codTaxAmountRefunded);
+        $creditmemo->setBaseGrandTotal($creditmemoBaseGrandTotal + $baseCodTaxToRefund)
+                   ->setGrandTotal($creditmemoGrandTotal         + $codTaxToRefund)
+                   ->setBaseTaxAmount($creditmemoBaseTaxAmount   + $baseCodTaxToRefund)
+                   ->setTaxAmount($creditmemoTaxAmount           + $codTaxToRefund)
+                   ->setBaseCodTaxAmount($codTaxToRefund)
+                   ->setCodTaxAmount($codTaxToRefund);
 
-        if ($baseCodTaxAmountToRefund <= 0) {
-            return $this;
-        }
-
-        $creditmemo->setBaseGrandTotal($creditmemoBaseGrandTotal + $baseCodTaxAmountToRefund)
-                   ->setGrandTotal($creditmemoGrandTotal         + $codTaxAmountToRefund)
-                   ->setBaseTaxAmount($creditmemoBaseTaxAmount   + $baseCodTaxAmountToRefund)
-                   ->setTaxAmount($creditmemoTaxAmount           + $codTaxAmountToRefund)
-                   ->setBaseCodTaxAmount($codTaxAmountToRefund)
-                   ->setCodTaxAmount($codTaxAmountToRefund);
-
-        $order->setBaseCodTaxAmountRefunded($baseCodTaxAmountRefunded + $baseCodTaxAmountToRefund)
-              ->setCodTaxAmountRefunded($codTaxAmountRefunded         + $codTaxAmountToRefund);
-
+        $order->setBaseCodTaxAmountRefunded($baseCodTaxAmountRefunded + $baseCodTaxToRefund)
+            ->setCodTaxAmountRefunded($codTaxAmountRefunded + $codTaxToRefund);
 
         return $this;
+    }
+
+    private function _getCodTax($order, $amount)
+    {
+
+        /**
+         * @var $helper Phoenix_CashOnDelivery_Helper_Data
+         */
+        $helper = Mage::helper('phoenix_cashondelivery');
+
+        $codTax = $helper->getCodTaxAmount($order, $amount);
+
+        return $codTax;
     }
 }

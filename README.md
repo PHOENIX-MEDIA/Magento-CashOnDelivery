@@ -10,6 +10,12 @@ This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), M
 Changelog
 ---------
 
+1.0.10
+- Implement issue #16: CoD refund now changeable
+
+1.0.9
+- Fix issue #23: Missing CoD tax in invoice/creditmemo tax subtotal
+
 1.0.8
 - Refactored the totals handling and added CoD totals to creditmemos and guest orders
 - Added composer and readme files

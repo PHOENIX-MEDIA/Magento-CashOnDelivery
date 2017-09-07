@@ -2,6 +2,13 @@
 class Phoenix_CashOnDelivery_Block_Adminhtml_Sales_Creditmemo_Create_Totals extends Mage_Adminhtml_Block_Template
 {
     /**
+     * Path to template file in theme.
+     *
+     * @var string
+     */
+    protected $_template = 'phoenix/cashondelivery/sales/creditmemo/create/totals.phtml';
+
+    /**
      * Holds the creditmemo object.
      * @var Mage_Sales_Model_Order_Creditmemo
      */
@@ -18,12 +25,10 @@ class Phoenix_CashOnDelivery_Block_Adminhtml_Sales_Creditmemo_Create_Totals exte
         $this->_source  = $parent->getSource();
         $total          = new Varien_Object(array(
             'code'      => 'phoenix_cashondelivery_fee',
-            'value'     => $this->getCodAmount(),
-            'base_value'=> $this->getCodAmount(),
-            'label'     => $this->helper('phoenix_cashondelivery')->__('Refund Cash on Delivery fee')
+            'block_name'=> $this->getNameInLayout(),
         ));
 
-        $parent->addTotalBefore($total, 'shipping');
+        $parent->addTotal($total, 'subtotal');
         return $this;
     }
 
@@ -43,8 +48,27 @@ class Phoenix_CashOnDelivery_Block_Adminhtml_Sales_Creditmemo_Create_Totals exte
      */
     public function getCodAmount()
     {
-        $codFee = $this->_source->getCodFee() + $this->_source->getCodTaxAmount();
+        $codFee = $this->getSource()->getCodFee();
+
+        if ($this->helper('phoenix_cashondelivery')->codPriceIncludesTax()) {
+            $codFee += $this->getSource()->getCodTaxAmount();
+        }
 
         return Mage::app()->getStore()->roundPrice($codFee);
+    }
+
+    /**
+     * Get label for refund subtotal
+     * @return string Refund label
+     */
+    public function getRefundLabel()
+    {
+        $base = $this->helper('phoenix_cashondelivery')->__('Refund Cash on Delivery fee');
+
+        $taxInclusionLabel = $this->helper('phoenix_cashondelivery')->codPriceIncludesTax() ? 'Incl.' : 'Excl.';
+        $taxLabel = sprintf('(%s Tax)', $taxInclusionLabel);
+        $tax = $this->helper('phoenix_cashondelivery')->__($taxLabel);
+
+        return sprintf('%s %s', $base, $tax);
     }
 }

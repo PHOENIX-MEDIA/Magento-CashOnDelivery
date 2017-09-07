@@ -59,7 +59,7 @@
 
     <adminhtml_sales_order_creditmemo_updateqty>
         <reference name="creditmemo_totals">
-            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/totals_creditmemo"/>
+            <block name="phoenix_cashondelivery_fee" type="phoenix_cashondelivery/adminhtml_sales_creditmemo_create_totals"/>
         </reference>
     </adminhtml_sales_order_creditmemo_updateqty>
 

@@ -34,7 +34,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     protected $_formBlockType = 'phoenix_cashondelivery/form';
     protected $_infoBlockType = 'phoenix_cashondelivery/info';
 
-    protected $_costCalcBase = 'subtotal';
+    protected $_costCalcBase = 'subtotal_incl_tax';
 
     /**
      * Get the configured inland fee.
@@ -102,7 +102,6 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     {
         if ($address->getCountry() == Mage::getStoreConfig('shipping/origin/country_id')) {
             return $this->getInlandCosts($address);
-
         } else {
             return $this->getForeignCountryCosts($address);
         }
@@ -116,7 +115,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      * @param bool $alreadyExclTax
      * @return float|null
      */
-    public function getAddressCodFee(Mage_Customer_Model_Address_Abstract $address, $value = null, $alreadyExclTax = false)
+    public function getAddressCodFee(Mage_Customer_Model_Address_Abstract $address, $source = null, $value = null, $alreadyExclTax = false)
     {
         $helper = Mage::helper('phoenix_cashondelivery');
 
@@ -126,7 +125,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
 
         if ($helper->codPriceIncludesTax()) {
             if (!$alreadyExclTax) {
-                $value = $helper->getCodPrice($value, false, $address, $address->getQuote()->getCustomerTaxClassId());
+                $value = $helper->getCodPrice($value, false, $address, $source);
             }
         }
         return $value;
@@ -140,7 +139,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      * @param bool $alreadyExclTax
      * @return int|float
      */
-    public function getAddressCodTaxAmount(Mage_Customer_Model_Address_Abstract $address, $value = null, $alreadyExclTax = false)
+    public function getAddressCodTaxAmount(Mage_Customer_Model_Address_Abstract $address, $source = null, $value = null, $alreadyExclTax = false)
     {
         $helper = Mage::helper('phoenix_cashondelivery');
 
@@ -149,9 +148,9 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
         }
 
         if ($helper->codPriceIncludesTax()) {
-            $includingTax = $helper->getCodPrice($value, true, $address, $address->getQuote()->getCustomerTaxClassId());
+            $includingTax = $helper->getCodPrice($value, true, $address, $source);
             if (!$alreadyExclTax) {
-                $value = $helper->getCodPrice($value, false, $address, $address->getQuote()->getCustomerTaxClassId());
+                $value = $helper->getCodPrice($value, false, $address, $source);
             }
             return $includingTax - $value;
         }
