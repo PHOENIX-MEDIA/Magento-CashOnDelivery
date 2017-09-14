@@ -37,5 +37,3 @@ $eav->addAttribute('invoice', 'cod_fee', array('type' => 'decimal',));
 $eav->addAttribute('invoice', 'base_cod_fee', array('type' => 'decimal'));
 
 $this->endSetup();
-
-?>

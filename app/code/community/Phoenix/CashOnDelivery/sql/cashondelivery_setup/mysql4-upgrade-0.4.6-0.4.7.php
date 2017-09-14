@@ -46,5 +46,3 @@ $this->startSetup();
     $setup->addAttribute('quote_address', 'base_cod_tax_amount', array('type' => 'decimal'));
 
 $this->endSetup();
-
-?>

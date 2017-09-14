@@ -42,12 +42,12 @@ class Phoenix_CashOnDelivery_Helper_Tax extends Mage_Tax_Helper_Data
 
     private function _getCashOnDeliveryTax($current)
     {
-        $codTaxInfo = [
+        $codTaxInfo = array(
             'tax_amount' => $current->getCodTaxAmount(),
             'base_tax_amount' => $current->getBaseCodTaxAmount(),
             'title' => $this->__('Cash on Delivery Tax'),
             'percent' => null
-        ];
+        );
 
         return $codTaxInfo;
     }

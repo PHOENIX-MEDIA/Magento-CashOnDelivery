@@ -25,5 +25,3 @@ $this->run("
     ");
 
 $this->endSetup();
-
-?>
