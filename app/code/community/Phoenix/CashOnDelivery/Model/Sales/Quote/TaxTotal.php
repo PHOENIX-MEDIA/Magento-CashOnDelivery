@@ -33,7 +33,7 @@ class Phoenix_CashOnDelivery_Model_Sales_Quote_TaxTotal extends Mage_Sales_Model
             return $this;
         }
 
-        $store = $address->getQuote()->getStore();        
+        $store = $address->getQuote()->getStore();
 
         $items = $address->getAllItems();
         if (!count($items)) {
@@ -93,7 +93,7 @@ class Phoenix_CashOnDelivery_Model_Sales_Quote_TaxTotal extends Mage_Sales_Model
     }
 
     public function fetch(Mage_Sales_Model_Quote_Address $address)
-    {        
+    {
         $store = $address->getQuote()->getStore();
         /**
          * Modify subtotal
@@ -105,7 +105,7 @@ class Phoenix_CashOnDelivery_Model_Sales_Quote_TaxTotal extends Mage_Sales_Model
             } else {
                 $subtotalInclTax = $address->getSubtotal()+ $address->getTaxAmount() -
                     $address->getShippingTaxAmount() - $address->getCodTaxAmount();
-            }            
+            }
 
             $address->addTotal(
                 array(

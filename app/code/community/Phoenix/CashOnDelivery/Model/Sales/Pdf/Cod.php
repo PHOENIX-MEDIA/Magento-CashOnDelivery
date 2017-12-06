@@ -39,7 +39,7 @@ class Phoenix_CashOnDelivery_Model_Sales_Pdf_Cod extends Mage_Sales_Model_Order_
         $fontSize      = $this->getFontSize() ? $this->getFontSize() : 7;
         $helper        = Mage::helper('phoenix_cashondelivery');
 
-        if ($helper->displayCodBothPrices()){
+        if ($helper->displayCodBothPrices()) {
             $totals = array(
                 array(
                     'amount'    => $this->getAmountPrefix().$amount,

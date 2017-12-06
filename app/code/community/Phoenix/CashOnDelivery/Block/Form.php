@@ -38,7 +38,7 @@ class Phoenix_CashOnDelivery_Block_Form extends Mage_Payment_Block_Form
         return $this->getQuote()->getShippingAddress();
     }
 
-    public function convertPrice($price, $format=false, $includeContainer = true)
+    public function convertPrice($price, $format = false, $includeContainer = true)
     {
         return $this->getQuote()->getStore()->convertPrice($price, $format, $includeContainer);
     }

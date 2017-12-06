@@ -23,9 +23,9 @@ class Phoenix_CashOnDelivery_Helper_Data extends Mage_Core_Helper_Data
     /**
      * Config path constants
      */
-    const CONFIG_XML_PATH_COD_TAX_CLASS = 'tax/classes/phoenix_cashondelivery_tax_class';
+    const CONFIG_XML_PATH_COD_TAX_CLASS    = 'tax/classes/phoenix_cashondelivery_tax_class';
     const CONFIG_XML_PATH_COD_INCLUDES_TAX = 'tax/calculation/phoenix_cashondelivery_includes_tax';
-    const CONFIG_XML_PATH_DISPLAY_COD = 'tax/display/phoenix_cashondelivery_fee';
+    const CONFIG_XML_PATH_DISPLAY_COD      = 'tax/display/phoenix_cashondelivery_fee';
 
 
     /**
@@ -54,7 +54,7 @@ class Phoenix_CashOnDelivery_Helper_Data extends Mage_Core_Helper_Data
      */
     public function codPriceIncludesTax($store = null)
     {
-        $store = Mage::app()->getStore($store);
+        $store   = Mage::app()->getStore($store);
         $storeId = $store->getId();
 
         if (!isset($this->_codPriceIncludesTax[$storeId])) {
@@ -139,10 +139,10 @@ class Phoenix_CashOnDelivery_Helper_Data extends Mage_Core_Helper_Data
     {
         if (!$this->_getTotalAfterPosition) {
 
-            $config = Mage::app()->getConfig()->getXpath('//sales/totals_sort');
-            $positions = end($config);
-            $positions = $positions->asArray();
-            $codPos = $positions['phoenix_cashondelivery'];
+            $config      = Mage::app()->getConfig()->getXpath('//sales/totals_sort');
+            $positions   = end($config);
+            $positions   = $positions->asArray();
+            $codPos      = $positions['phoenix_cashondelivery'];
             $beforeTotal = 'subtotal';
 
             asort($positions);

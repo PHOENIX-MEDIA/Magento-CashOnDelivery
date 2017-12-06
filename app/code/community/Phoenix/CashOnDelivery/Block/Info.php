@@ -48,8 +48,9 @@ class Phoenix_CashOnDelivery_Block_Info extends Mage_Payment_Block_Info
     public function getCodFeeExclTax()
     {
         if ($_dataObject = $this->_getDataObject()) {
-            $extraFeeExcl = $_dataObject->getCodFee() ? $this->_getPriceModel()->formatPrice($_dataObject->getCodFee()) : null;
-            return $extraFeeExcl;
+            if ($_dataObject->getCodFee()) {
+                return $this->_getPriceModel()->formatPrice($_dataObject->getCodFee());
+            }
         }
         return null;
     }
@@ -57,8 +58,9 @@ class Phoenix_CashOnDelivery_Block_Info extends Mage_Payment_Block_Info
     public function getCodFeeInclTax()
     {
         if ($_dataObject = $this->_getDataObject()) {
-            $extraFeeIncl = $_dataObject->getCodFee() ? $this->_getPriceModel()->formatPrice($_dataObject->getCodFee()+$_dataObject->getCodTaxAmount()) : null;
-            return $extraFeeIncl;
+            if ($_dataObject->getCodFee()) {
+                return $this->_getPriceModel()->formatPrice($_dataObject->getCodFee() + $_dataObject->getCodTaxAmount());
+            }
         }
         return null;
     }
@@ -66,7 +68,6 @@ class Phoenix_CashOnDelivery_Block_Info extends Mage_Payment_Block_Info
     protected function _getDataObject()
     {
         if (!isset($this->_dataObject)) {
-
             $dataObject = $this->getInfo()->getQuote();
 
             if (!is_object($dataObject)) {
@@ -81,7 +82,6 @@ class Phoenix_CashOnDelivery_Block_Info extends Mage_Payment_Block_Info
     protected function _getPriceModel()
     {
         if (!isset($this->_priceModel)) {
-
             $quote      = $this->getInfo()->getQuote();
             $priceModel = null;
 

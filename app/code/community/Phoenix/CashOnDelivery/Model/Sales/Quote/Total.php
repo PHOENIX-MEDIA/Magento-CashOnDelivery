@@ -43,7 +43,7 @@ class Phoenix_CashOnDelivery_Model_Sales_Quote_Total extends Mage_Sales_Model_Qu
             return $this;
         }
 
-        $baseTotal = $address->getBaseGrandTotal();        
+        $baseTotal = $address->getBaseGrandTotal();
 
         $baseCodFee = $paymentMethod->getAddressCodFee($address);
 
@@ -68,14 +68,14 @@ class Phoenix_CashOnDelivery_Model_Sales_Quote_Total extends Mage_Sales_Model_Qu
         //Updating cod tax if it is already included into a COD fee
         $baseCodTaxAmount = $paymentMethod->getAddressCodTaxAmount($address);
         $address->setBaseCodTaxAmount($baseCodTaxAmount);
-        $address->setCodTaxAmount($store->convertPrice($baseCodTaxAmount, false));       
+        $address->setCodTaxAmount($store->convertPrice($baseCodTaxAmount, false));
 
         return $this;
     }
 
     public function fetch(Mage_Sales_Model_Quote_Address $address)
     {
-        $amount = $address->getCodFee();        
+        $amount = $address->getCodFee();
         if ($amount!=0) {
             $quote = $address->getQuote();
             $address->addTotal(
