@@ -11,8 +11,9 @@ Changelog
 ---------
 
 1.0.12
-- "SR-714 allow capture offline" (Thanks to Pascal Querner)
-- Fixed "Display Zero Fee" in customer account order view" (Thanks to [idziakjakub](https://github.com/idziakjakub) (#21))
+- "SR-714 allow capture offline" (Thanks to [Pascal Querner](https://github.com/MSCG/Magento-CashOnDelivery/commit/75475a11d647f8f14c9a4de0654b068f6a9d079a))
+- Fixed "Display Zero Fee" in customer account order view" (Thanks to [idziakjakub](https://github.com/macopedia/Magento-CashOnDelivery/commit/ba0f39433f8cbae7cb79cd19a6da0c70d541e1c8) (#21))
+- Add "cod_fee", "base_cod_fee" attributes to webservices (Thanks to [tawfekov](https://github.com/tawfekov/Magento-CashOnDelivery/commit/db91efdf110a1b9114e9d9e232925f20d382ae32) (#33))
 
 1.0.11
 - Add locale "en_GB" and "pt_PT"
