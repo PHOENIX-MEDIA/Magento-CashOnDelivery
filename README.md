@@ -10,8 +10,12 @@ This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), M
 Changelog
 ---------
 
-1.0.10
-- Implement issue #16: CoD refund now changeable
+1.0.12
+- "SR-714 allow capture offline" (Thanks to Pascal Querner)
+
+1.0.11
+- Add locale "en_GB" and "pt_PT"
+- Improve localization
 
 1.0.9
 - Fix issue #23: Missing CoD tax in invoice/creditmemo tax subtotal
