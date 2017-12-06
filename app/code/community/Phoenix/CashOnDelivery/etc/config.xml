@@ -119,7 +119,7 @@
                     <phoenix_cashondelivery>
                         <type>singleton</type>
                         <class>phoenix_cashondelivery/observer</class>
-                        <method>sales_quote_collect_totals_after</method>
+                        <method>salesQuoteCollectTotalsAfter</method>
                     </phoenix_cashondelivery>
                 </observers>
             </sales_quote_collect_totals_after>
@@ -128,7 +128,7 @@
                     <phoenix_cashondelivery>
                         <type>singleton</type>
                         <class>phoenix_cashondelivery/observer</class>
-                        <method>sales_order_payment_place_end</method>
+                        <method>salesOrderPaymentPlaceEnd</method>
                     </phoenix_cashondelivery>
                 </observers>
             </sales_order_payment_place_end>
@@ -137,7 +137,7 @@
                     <phoenix_cashondelivery>
                         <type>singleton</type>
                         <class>phoenix_cashondelivery/observer</class>
-                        <method>order_cancel_after</method>
+                        <method>orderCancelAfter</method>
                     </phoenix_cashondelivery>
                 </observers>
             </order_cancel_after>
