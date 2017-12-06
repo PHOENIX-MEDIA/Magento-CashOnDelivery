@@ -12,6 +12,7 @@ Changelog
 
 1.0.12
 - "SR-714 allow capture offline" (Thanks to Pascal Querner)
+- Fixed "Display Zero Fee" in customer account order view" (Thanks to [idziakjakub](https://github.com/idziakjakub) (#21))
 
 1.0.11
 - Add locale "en_GB" and "pt_PT"
