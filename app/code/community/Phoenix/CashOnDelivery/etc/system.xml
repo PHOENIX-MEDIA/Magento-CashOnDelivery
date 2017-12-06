@@ -48,7 +48,7 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <active translate="label">
+                        <enable translate="label">
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -56,7 +56,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </active>
+                        </enable>
                         <display_zero_fee translate="label">
                             <label>Display Zero Fee</label>
                             <frontend_type>select</frontend_type>
@@ -75,7 +75,7 @@
                             <show_in_store>1</show_in_store>
                         </title>
                         <order_status translate="label">
-                            <label>New order status</label>
+                            <label>New Order Status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status</source_model>
                             <sort_order>40</sort_order>
@@ -84,7 +84,7 @@
                             <show_in_store>1</show_in_store>
                         </order_status>
                         <sort_order translate="label">
-                            <label>Sort order</label>
+                            <label>Sort Order</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
@@ -92,7 +92,7 @@
                             <show_in_store>1</show_in_store>
                         </sort_order>
                         <shippingallowspecific translate="label">
-                            <label>Shipment to applicable countries</label>
+                            <label>Ship to Applicable Countries</label>
                             <frontend_type>allowspecific</frontend_type>
                             <sort_order>60</sort_order>
                             <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
@@ -101,7 +101,7 @@
                             <show_in_store>1</show_in_store>
                         </shippingallowspecific>
                         <shippingspecificcountry translate="label">
-                            <label>Shipment to Specific countries</label>
+                            <label>Ship to Specific Countries</label>
                             <frontend_type>multiselect</frontend_type>
                             <sort_order>70</sort_order>
                             <source_model>adminhtml/system_config_source_country</source_model>

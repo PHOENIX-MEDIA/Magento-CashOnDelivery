@@ -23,7 +23,7 @@
 <config>
     <modules>
         <Phoenix_CashOnDelivery>
-            <version>1.0.10</version>
+            <version>1.0.11</version>
         </Phoenix_CashOnDelivery>
     </modules>
 
@@ -164,10 +164,10 @@
         </sales>
         <payment>
             <phoenix_cashondelivery>
-                <active>0</active>
+                <title>Cash on Delivery</title>
+                <enable>0</enable>
                 <model>phoenix_cashondelivery/cashOnDelivery</model>
                 <order_status>1</order_status>
-                <title>Cash on Delivery</title>
                 <allowspecific>0</allowspecific>
                 <shippingallowspecific>0</shippingallowspecific>
                 <disallowspecificshippingmethods>0</disallowspecificshippingmethods>
