@@ -116,4 +116,37 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
 
         return $this;
     }
+
+
+    /**
+     * Invoice and set status to Cash On Delivery if order payment type is Cash on Delivery
+     *
+     * @author: https://github.com/Flipmediaco/Magento-CashOnDelivery/blob/8ae36cffd3bbab8e61852810c21a3c3a558378b4/app/code/community/Phoenix/CashOnDelivery/Model/Observer.php
+     * @param Varien_Event_Observer $observer
+     * @return void
+     */
+    public function invoiceCashOnDelivery($observer)
+    {
+		// Get order
+		$order = $observer->getEvent()->getOrder();
+    	
+		// If order is instance of Phoenix_CashOnDelivery_Model_CashOnDelivery
+		if ($order->getPayment()->getMethodInstance()->getCode() == 'phoenix_cashondelivery' && 
+			// Can be invoiced
+			$order->canvoice() &&
+			// order_invoice is true
+			Mage::getStoreConfig('payment/phoenix_cashondelivery/order_invoice')) {
+			// Prepare invoice
+			$invoice = Mage::getModel('sales/service_order', $order)->prepareInvoice();
+			// Set capture case - OFFLINE
+			$invoice->setRequestedCaptureCase(Mage_Sales_Model_Order_Invoice::CAPTURE_OFFLINE);
+			$invoice->register();
+			//
+			// Save transaction
+			$transactionSave =	Mage::getModel('core/resource_transaction')
+								->addObject($invoice)
+								->addObject($invoice->getOrder());
+			$transactionSave->save();
+		}
+    }
 }

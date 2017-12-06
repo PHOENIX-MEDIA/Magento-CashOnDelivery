@@ -17,6 +17,7 @@ Changelog
 - Update to better fit ECG/PSR-2 (Thanks to [sreichel](https://github.com/sreichel/Magento-CashOnDelivery/commit/bbaf06d84169675f6f84eba341e593265c9cf235))
 - Removed not used observer method (Thanks to [sreichel](https://github.com/sreichel/Magento-CashOnDelivery/commit/89cbd3c2d464e900c1c1ac3e00cbc8f8a09cade7))
 - Hide config options if module is disabled (Thanks to [sreichel](https://github.com/sreichel/Magento-CashOnDelivery/commit/a0ba5148f4f368fb4a553e416555ea10d213a0c6))
+- Fixed "Add Create Invoice Option - Add ability to configure that a cash on delivery order automatically create an invoice." (Thanks to [Flipmediaco](https://github.com/Flipmediaco/Magento-CashOnDelivery/commit/8ae36cffd3bbab8e61852810c21a3c3a558378b4) (#19))
 
 1.0.11
 - Add locale "en_GB" and "pt_PT"

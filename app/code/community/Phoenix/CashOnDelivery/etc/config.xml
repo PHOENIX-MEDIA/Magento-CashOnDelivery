@@ -141,6 +141,15 @@
                     </phoenix_cashondelivery>
                 </observers>
             </order_cancel_after>
+            <sales_order_place_after>
+                <observers>
+                    <phoenix_cashondelivery>
+                        <type>singleton</type>
+                        <class>phoenix_cashondelivery/observer</class>
+                        <method>invoiceCashOnDelivery</method>
+                    </phoenix_cashondelivery>
+                </observers>
+            </sales_order_place_after>
         </events>
         <pdf>
             <totals>
