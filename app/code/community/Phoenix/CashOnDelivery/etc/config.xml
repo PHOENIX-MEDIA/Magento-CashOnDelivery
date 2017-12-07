@@ -23,7 +23,7 @@
 <config>
     <modules>
         <Phoenix_CashOnDelivery>
-            <version>1.0.12</version>
+            <version>1.0.13</version>
         </Phoenix_CashOnDelivery>
     </modules>
 

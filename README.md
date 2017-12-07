@@ -10,6 +10,10 @@ This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), M
 Changelog
 ---------
 
+1.0.13
+- Add locale "fr_FR" (Thanks to [MaWoScha](https://github.com/MaWoScha))
+- Improve locale "it_IT" (Thanks to [emiliolodigiani](https://github.com/emiliolodigiani/Magento-CashOnDelivery/commit/0fe069c8af3645db16c12825c1d06642c580b312))
+
 1.0.12
 - "SR-714 allow capture offline" (Thanks to [Pascal Querner](https://github.com/MSCG/Magento-CashOnDelivery/commit/75475a11d647f8f14c9a4de0654b068f6a9d079a))
 - Fixed "Display Zero Fee" in customer account order view" (Thanks to [idziakjakub](https://github.com/macopedia/Magento-CashOnDelivery/commit/ba0f39433f8cbae7cb79cd19a6da0c70d541e1c8) (#21))
@@ -18,7 +22,6 @@ Changelog
 - Removed not used observer method (Thanks to [sreichel](https://github.com/sreichel/Magento-CashOnDelivery/commit/89cbd3c2d464e900c1c1ac3e00cbc8f8a09cade7))
 - Hide config options if module is disabled (Thanks to [sreichel](https://github.com/sreichel/Magento-CashOnDelivery/commit/a0ba5148f4f368fb4a553e416555ea10d213a0c6))
 - Fixed "Add Create Invoice Option - Add ability to configure that a cash on delivery order automatically create an invoice." (Thanks to [Flipmediaco](https://github.com/Flipmediaco/Magento-CashOnDelivery/commit/8ae36cffd3bbab8e61852810c21a3c3a558378b4) (#19))
-- Improve locale "it_IT" (Thanks to [emiliolodigiani](https://github.com/emiliolodigiani/Magento-CashOnDelivery/commit/0fe069c8af3645db16c12825c1d06642c580b312))
 
 1.0.11
 - Add locale "en_GB" and "pt_PT"

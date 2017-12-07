@@ -17,7 +17,7 @@
          <name>Phoenix Medien</name>
       </name>
       <user>
-         <user>auto-converted</user>
+         <user>auto_converted</user>
       </user>
       <email>
          <email>info@phoenix-medien.de</email>
@@ -69,6 +69,7 @@
          <target>magelocale</target>
          <target>magelocale</target>
          <target>magelocale</target>
+         <target>magelocale</target>
          <target>magedesign</target>
          <target>magedesign</target>
          <target>magedesign</target>
@@ -84,6 +85,7 @@
          <path>en_US/Phoenix_CashOnDelivery.csv</path>
          <path>en_GB/Phoenix_CashOnDelivery.csv</path>
          <path>es_ES/Phoenix_CashOnDelivery.csv</path>
+         <path>fr_FR/Phoenix_CashOnDelivery.csv</path>
          <path>it_IT/Phoenix_CashOnDelivery.csv</path>
          <path>nb_NO/Phoenix_CashOnDelivery.csv</path>
          <path>pl_PL/Phoenix_CashOnDelivery.csv</path>
@@ -97,6 +99,7 @@
       <type>
          <type>file</type>
          <type>dir</type>
+         <type>file</type>
          <type>file</type>
          <type>file</type>
          <type>file</type>
@@ -131,9 +134,11 @@
          <include/>
          <include/>
          <include/>
+         <include/>
       </include>
       <ignore>
          <ignore/>
+         <ignore>#^.DS_Store#</ignore>
          <ignore>#^.DS_Store#</ignore>
          <ignore>#^.DS_Store#</ignore>
          <ignore>#^.DS_Store#</ignore>
