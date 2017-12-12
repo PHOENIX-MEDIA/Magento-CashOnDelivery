@@ -37,7 +37,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
     protected $_formBlockType = 'phoenix_cashondelivery/form';
     protected $_infoBlockType = 'phoenix_cashondelivery/info';
 
-    protected $_costCalcBase = 'subtotal_incl_tax';
+    protected $_costCalcBase  = 'subtotal_incl_tax';
 
     /**
      * Get the configured inland fee.
@@ -60,7 +60,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      */
     public function getForeignCountryCosts($address = null)
     {
-        return $this->getCosts($address, 'foreigncosts');
+        return $this->getCosts($address, 'foreigncountrycosts');
     }
 
     /**

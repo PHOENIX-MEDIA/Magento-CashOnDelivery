@@ -10,6 +10,9 @@ This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), M
 Changelog
 ---------
 
+1.0.14
+- Fix issue #42: "foreigncosts" to "foreigncountrycosts" (Thanks to [sulabh](https://github.com/sulabh/Magento-CashOnDelivery/commit/c4bb65e374da3009cab92a982edad6b24e95ab88))
+
 1.0.13
 - Add locale "fr_FR" (Thanks to [MaWoScha](https://github.com/MaWoScha))
 - Improve locale "it_IT" (Thanks to [emiliolodigiani](https://github.com/emiliolodigiani/Magento-CashOnDelivery/commit/0fe069c8af3645db16c12825c1d06642c580b312))
