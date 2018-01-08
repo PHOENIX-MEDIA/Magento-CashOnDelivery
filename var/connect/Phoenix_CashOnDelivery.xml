@@ -11,20 +11,22 @@
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
    <version>1.0.14</version>
    <stability>stable</stability>
-   <notes>Offizielle Version</notes>
+   <notes>ase Cash on Delivery fee calculation on subtotal including tax
+CoD refund now changeable
+Missing CoD tax in invoice/creditmemo tax subtotal</notes>
    <authors>
       <name>
-         <name>Phoenix Medien</name>
+         <name>Phoenix Media GmbH</name>
       </name>
       <user>
-         <user>auto_converted</user>
+         <user>PHOENIX</user>
       </user>
       <email>
-         <email>info@phoenix-medien.de</email>
+         <email>support@at.phoenix-media.eu</email>
       </email>
    </authors>
    <depends_php_min>5.2.0</depends_php_min>
-   <depends_php_max>6.0.0</depends_php_max>
+   <depends_php_max>7.0.27</depends_php_max>
    <depends>
       <package>
          <name>
