@@ -64,7 +64,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      * Get the cash on delivery fee based on the address and its type (inland or foreign)
      *
      * @param Mage_Customer_Model_Address_Abstract|null $address
-     * @param string $type One of 'inlandcosts' or 'foreigncosts'
+     * @param string $type One of 'inlandcosts' or 'foreigncountrycosts'
      * @return float
      */
     public function getCosts($address, $type)
