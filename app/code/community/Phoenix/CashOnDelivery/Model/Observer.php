@@ -26,8 +26,8 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
      * @param Varien_Event_Observer $observer
      * @return Phoenix_CashOnDelivery_Model_Observer
      */
-    public function sales_quote_collect_totals_after(Varien_Event_Observer $observer) 
-    {        
+    public function salesQuoteCollectTotalsAfter(Varien_Event_Observer $observer) 
+    {
         $quote = $observer->getEvent()->getQuote();
         $data  = $observer->getInput();
 
@@ -51,11 +51,11 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
      * @param Varien_Event_Observer $observer
      * @return Phoenix_CashOnDelivery_Model_Observer
      */
-    public function sales_order_payment_place_end(Varien_Event_Observer $observer) 
-    {        
+    public function salesOrderPaymentPlaceEnd(Varien_Event_Observer $observer) 
+    {
         $payment = $observer->getPayment();
         if ($payment->getMethodInstance()->getCode() != 'phoenix_cashondelivery') {
-            return $this;;
+            return $this;
         }
 
         $order = $payment->getOrder();
@@ -75,35 +75,12 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
     }
 
     /**
-     * Performs order_create_loadBlock response update
-     * adds totals block to each response
-     * This function is deprecated, the totals block update is implemented
-     * in phoenix/cashondelivery/sales.js (SalesOrder class extension)
-     * 
-     * @param Varien_Event_Observer $observer
-     * @return Phoenix_CashOnDelivery_Model_Observer
-     */
-    public function controller_action_layout_load_before(Varien_Event_Observer $observer) 
-    {        
-        $action = $observer->getAction();
-
-        if ($action->getFullActionName() != 'adminhtml_sales_order_create_loadBlock' || !$action->getRequest()->getParam('json')) {
-            return $this;
-        }
-
-        $layout = $observer->getLayout();
-        $layout->getUpdate()->addHandle('adminhtml_sales_order_create_load_block_totals');
-
-        return $this;
-    }
-
-    /**
      * When the order gets canceled we put the Cash on Delivery fee and tax also in the canceled columns.
      *
      * @param Varien_Event_Observer $observer
      * @return Phoenix_CashOnDelivery_Model_Observer
      */
-    public function order_cancel_after(Varien_Event_Observer $observer)
+    public function orderCancelAfter(Varien_Event_Observer $observer)
     {
         $order = $observer->getEvent()->getOrder();
 
@@ -116,7 +93,7 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
         $codTax     = $order->getCodTaxAmount();
         $baseCodTax = $order->getBaseCodTaxAmount();
 
-        $codFeeInvoiced     = $order->getCodFeeInvoiced();
+        $codFeeInvoiced = $order->getCodFeeInvoiced();
 
         if ($codFeeInvoiced) {
             $baseCodFeeInvoiced = $order->getBaseCodFeeInvoiced();
@@ -138,5 +115,38 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
         }
 
         return $this;
+    }
+
+
+    /**
+     * Invoice and set status to Cash On Delivery if order payment type is Cash on Delivery
+     *
+     * @author: https://github.com/Flipmediaco/Magento-CashOnDelivery/blob/8ae36cffd3bbab8e61852810c21a3c3a558378b4/app/code/community/Phoenix/CashOnDelivery/Model/Observer.php
+     * @param Varien_Event_Observer $observer
+     * @return void
+     */
+    public function invoiceCashOnDelivery($observer)
+    {
+		// Get order
+		$order = $observer->getEvent()->getOrder();
+    	
+		// If order is instance of Phoenix_CashOnDelivery_Model_CashOnDelivery
+		if ($order->getPayment()->getMethodInstance()->getCode() == 'phoenix_cashondelivery' && 
+			// Can be invoiced
+			$order->canvoice() &&
+			// order_invoice is true
+			Mage::getStoreConfig('payment/phoenix_cashondelivery/order_invoice')) {
+			// Prepare invoice
+			$invoice = Mage::getModel('sales/service_order', $order)->prepareInvoice();
+			// Set capture case - OFFLINE
+			$invoice->setRequestedCaptureCase(Mage_Sales_Model_Order_Invoice::CAPTURE_OFFLINE);
+			$invoice->register();
+			//
+			// Save transaction
+			$transactionSave =	Mage::getModel('core/resource_transaction')
+								->addObject($invoice)
+								->addObject($invoice->getOrder());
+			$transactionSave->save();
+		}
     }
 }

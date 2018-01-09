@@ -48,7 +48,7 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <active translate="label">
+                        <enable translate="label">
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -56,7 +56,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </active>
+                        </enable>
                         <display_zero_fee translate="label">
                             <label>Display Zero Fee</label>
                             <frontend_type>select</frontend_type>
@@ -65,6 +65,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </display_zero_fee>
                         <title translate="label">
                             <label>Title</label>
@@ -73,35 +74,39 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </title>
                         <order_status translate="label">
-                            <label>New order status</label>
+                            <label>New Order Status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status</source_model>
                             <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </order_status>
                         <sort_order translate="label">
-                            <label>Sort order</label>
+                            <label>Sort Order</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </sort_order>
                         <shippingallowspecific translate="label">
-                            <label>Shipment to applicable countries</label>
+                            <label>Ship to Applicable Countries</label>
                             <frontend_type>allowspecific</frontend_type>
                             <sort_order>60</sort_order>
                             <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </shippingallowspecific>
                         <shippingspecificcountry translate="label">
-                            <label>Shipment to Specific countries</label>
+                            <label>Ship to Specific Countries</label>
                             <frontend_type>multiselect</frontend_type>
                             <sort_order>70</sort_order>
                             <source_model>adminhtml/system_config_source_country</source_model>
@@ -109,6 +114,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <depends>
+                                <enable>1</enable>
                                 <shippingallowspecific>1</shippingallowspecific>
                             </depends>
                         </shippingspecificcountry>
@@ -119,6 +125,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </min_order_total>
                         <max_order_total translate="label">
                             <label>Maximum Order Total</label>
@@ -127,6 +134,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </max_order_total>
                         <cost_type translate="label">
                             <label>Cost calculation</label>
@@ -136,6 +144,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </cost_type>
                         <inlandcosts translate="label">
                             <label>Costs for inland shipping</label>
@@ -144,6 +153,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </inlandcosts>
                         <minimum_inlandcosts translate="label">
                             <label>Costs for inland shipping (minimum)</label>
@@ -153,6 +163,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <depends>
+                                <enable>1</enable>
                                 <cost_type>1</cost_type>
                             </depends>
                         </minimum_inlandcosts>
@@ -163,6 +174,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </foreigncountrycosts>
                         <minimum_foreigncountrycosts translate="label">
                             <label>Costs for shipping to foreign countries (minimum)</label>
@@ -172,6 +184,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <depends>
+                                <enable>1</enable>
                                 <cost_type>1</cost_type>
                             </depends>
                         </minimum_foreigncountrycosts>
@@ -182,6 +195,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </customtext>
                         <disallowspecificshippingmethods translate="label">
                             <label>Disallow specific shipping methods</label>
@@ -191,6 +205,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
                         </disallowspecificshippingmethods>
                         <disallowedshippingmethods translate="label">
                             <label>Disallowed shipping methods</label>
@@ -201,6 +216,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <depends>
+                                <enable>1</enable>
                                 <disallowspecificshippingmethods>1</disallowspecificshippingmethods>
                             </depends>
                         </disallowedshippingmethods>                        

@@ -20,7 +20,7 @@
 
 /**
  * COD fee Total Row Renderer
- * 
+ *
  */
 class Phoenix_CashOnDelivery_Block_Checkout_Cod extends Mage_Checkout_Block_Total_Default
 {
