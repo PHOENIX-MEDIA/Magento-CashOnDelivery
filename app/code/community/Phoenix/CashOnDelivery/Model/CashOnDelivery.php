@@ -57,7 +57,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      */
     public function getForeignCountryCosts($address = null)
     {
-        return $this->getCosts($address, 'foreigncosts');
+        return $this->getCosts($address, 'foreigncountrycosts');
     }
 
     /**
