@@ -18,3 +18,5 @@
 "Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.","Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation."
 "Cash on Delivery Tax","Cash on Delivery Tax"
 "Display Zero Fee","Display Zero Fee"
+"Disallow specific shipping methods","Disallow specific shipping methods"
+"Disallowed shipping methods","Disallowed shipping methods"

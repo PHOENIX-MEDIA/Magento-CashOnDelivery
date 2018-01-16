@@ -18,3 +18,5 @@
 "Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.","Por favor, introduce el nombre de un campo del modelo sales_flat_quote_address que se usará como base para el cálculo."
 "Cash on Delivery Tax","Impuesto por contrareembolso"
 "Display Zero Fee","Mostrar cuota cero"
+"Disallow specific shipping methods","Excluir métodos de entrega específicos"
+"Disallowed shipping methods","Métodos de entrega excludidos"
