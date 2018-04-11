@@ -94,7 +94,7 @@
                         <before>grand_total</before>
                     </phoenix_cashondelivery_tax>
                     <phoenix_cashondelivery_subtotal>
-                      <class>phoenix_cashondelivery/sales_invoice_subtotal</class>
+                        <class>phoenix_cashondelivery/sales_invoice_subtotal</class>
                     </phoenix_cashondelivery_subtotal>
                 </totals>
             </order_invoice>
@@ -123,15 +123,6 @@
                     </phoenix_cashondelivery>
                 </observers>
             </sales_quote_collect_totals_after>
-            <sales_order_payment_place_end>
-                <observers>
-                    <phoenix_cashondelivery>
-                        <type>singleton</type>
-                        <class>phoenix_cashondelivery/observer</class>
-                        <method>sales_order_payment_place_end</method>
-                    </phoenix_cashondelivery>
-                </observers>
-            </sales_order_payment_place_end>
             <order_cancel_after>
                 <observers>
                     <phoenix_cashondelivery>
@@ -154,6 +145,22 @@
                 </phoenix_cashondelivery>
             </totals>
         </pdf>
+        <fieldsets>
+            <sales_convert_quote>
+                <cod_fee>
+                    <to_order>*</to_order>
+                </cod_fee>
+                <base_cod_fee>
+                    <to_order>*</to_order>
+                </base_cod_fee>
+                <cod_tax_amount>
+                    <to_order>*</to_order>
+                </cod_tax_amount>
+                <base_cod_tax_amount>
+                    <to_order>*</to_order>
+                </base_cod_tax_amount>
+            </sales_convert_quote>
+        </fieldsets>
     </global>
 
     <default>
