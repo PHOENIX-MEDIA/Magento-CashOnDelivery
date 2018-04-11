@@ -119,6 +119,7 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
      */
     public function invoice_cashondelivery($observer)
     {
+        /** @var Mage_Sales_Model_Order $order */
         $order = $observer->getEvent()->getOrder();
 
         if ($order->getPayment()->getMethodInstance()->getCode() === 'phoenix_cashondelivery'
@@ -130,6 +131,10 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
 
             $invoice->setRequestedCaptureCase(Mage_Sales_Model_Order_Invoice::CAPTURE_OFFLINE);
             $invoice->register();
+
+            $orderState = Mage_Sales_Model_Order::STATE_PROCESSING;
+            $invoice->getOrder()->setState($orderState)
+                ->setStatus($order->getConfig()->getStateDefaultStatus($orderState));
 
             $transactionSave = Mage::getModel('core/resource_transaction')
                 ->addObject($invoice)
