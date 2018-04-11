@@ -44,7 +44,7 @@ class Phoenix_CashOnDelivery_Block_Totals_Abstract extends Mage_Core_Block_Abstr
     {
         $this->_prepareTotals();
 
-        if ($this->_totalObject && $this->_totalObject->getCodFee()) {
+        if ($this->_totalObject && $this->_totalObject->getCodFee() && Mage::getStoreConfigFlag('payment/phoenix_cashondelivery/display_zero_fee')) {
             $label     = $this->__('Cash on Delivery fee');
             $value     = $this->_totalObject->getCodFee();
             $baseValue = $this->_totalObject->getBaseCodFee();
