@@ -10,6 +10,17 @@ This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), M
 Changelog
 ---------
 
+1.0.13
+- "SR-714 allow capture offline" (Thanks to [Pascal Querner](https://github.com/MSCG/Magento-CashOnDelivery/commit/75475a11d647f8f14c9a4de0654b068f6a9d079a))
+
+1.0.12
+- Add locale "en_GB", "fr_FR" and "pt_PT"  (Thanks to [MaWoScha](https://github.com/MaWoScha))
+- Improve locale "it_IT" (Thanks to [emiliolodigiani](https://github.com/emiliolodigiani/Magento-CashOnDelivery/commit/0fe069c8af3645db16c12825c1d06642c580b312))
+- Improve or complete other localizations
+
+1.0.11
+- Implement issue #43: Change 'foreigncosts' to 'foreigncountrycosts'
+
 1.0.10
 - Implement issue #16: CoD refund now changeable
 
