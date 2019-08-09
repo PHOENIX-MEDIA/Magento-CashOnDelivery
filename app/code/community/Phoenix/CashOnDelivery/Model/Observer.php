@@ -46,35 +46,6 @@ class Phoenix_CashOnDelivery_Model_Observer extends Mage_Core_Model_Abstract
     }
 
     /**
-     * Adds codFee to order
-     * 
-     * @param Varien_Event_Observer $observer
-     * @return Phoenix_CashOnDelivery_Model_Observer
-     */
-    public function sales_order_payment_place_end(Varien_Event_Observer $observer) 
-    {        
-        $payment = $observer->getPayment();
-        if ($payment->getMethodInstance()->getCode() != 'phoenix_cashondelivery') {
-            return $this;
-        }
-
-        $order = $payment->getOrder();
-        $quote = Mage::getSingleton('checkout/session')->getQuote();
-
-        if (!$quote->getId()) {
-            $quote = Mage::getSingleton('adminhtml/session_quote')->getQuote();
-        }
-
-        $order->setCodFee($quote->getCodFee());
-        $order->setBaseCodFee($quote->getBaseCodFee());
-        $order->setCodTaxAmount($quote->getCodTaxAmount());
-        $order->setBaseCodTaxAmount($quote->getBaseCodTaxAmount());
-        $order->save();
-
-        return $this;
-    }
-
-    /**
      * When the order gets canceled we put the Cash on Delivery fee and tax also in the canceled columns.
      *
      * @param Varien_Event_Observer $observer

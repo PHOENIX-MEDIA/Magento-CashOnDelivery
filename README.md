@@ -10,6 +10,10 @@ This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), M
 Changelog
 ---------
 
+1.0.15
+- Quote data to order data using sales_convert_quote fieldset (Thanks to [postadelmaga](https://github.com/PHOENIX-MEDIA/Magento-CashOnDelivery/commit/85a7fc31ec3de24e89ee68a1e62f409238ec7418) (#50))
+- Add "cod_fee", "base_cod_fee" attributes to webservices (Thanks to [tawfekov](https://github.com/tawfekov/Magento-CashOnDelivery/commit/db91efdf110a1b9114e9d9e232925f20d382ae32) (#33))
+
 1.0.14
 - Removed not used observer method (Thanks to [sreichel](https://github.com/sreichel/Magento-CashOnDelivery/commit/89cbd3c2d464e900c1c1ac3e00cbc8f8a09cade7))
 - Fixed "Add Create Invoice Option - Add ability to configure that a cash on delivery order automatically create an invoice." (Thanks to [Flipmediaco](https://github.com/Flipmediaco/Magento-CashOnDelivery/commit/8ae36cffd3bbab8e61852810c21a3c3a558378b4) (#19))
