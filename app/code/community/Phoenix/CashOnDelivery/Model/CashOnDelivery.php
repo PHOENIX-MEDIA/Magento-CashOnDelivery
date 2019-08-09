@@ -70,7 +70,7 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      */
     public function getCosts($address, $type)
     {
-        $cost = $this->getConfigData($type);
+        $cost    = $this->getConfigData($type);
         $minCost = $this->getConfigData("minimum_$type");
 
         if (is_object($address) && Mage::getStoreConfigFlag(self::XML_CONFIG_PATH_CASHONDELIVERY_COST_TYPE)) {
@@ -166,9 +166,14 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      */
     public function isAvailable($quote = null)
     {
+        if ($quote->isVirtual()) {
+            return false;
+        }
+
         if (!parent::isAvailable($quote)) {
             return false;
         }
+
         if (!is_null($quote)) {
             if ($this->getConfigData('shippingallowspecific', $quote->getStoreId()) == 1) {
                 $country            = $quote->getShippingAddress()->getCountry();
