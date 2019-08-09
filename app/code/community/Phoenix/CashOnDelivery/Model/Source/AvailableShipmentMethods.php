@@ -24,7 +24,7 @@ class Phoenix_CashOnDelivery_Model_Source_AvailableShipmentMethods
     {
         $options =  array();
 
-        foreach (Mage::app()->getStore()->getConfig('carriers') as $code => $carrier) {            
+        foreach (Mage::app()->getStore()->getConfig('carriers') as $code => $carrier) {
             if ($carrier['active'] && isset($carrier['title'])) {
                 $options[] = array(
                     'value' => $code,

@@ -20,7 +20,7 @@
 <config>
     <modules>
         <Phoenix_CashOnDelivery>
-            <version>1.0.13</version>
+            <version>1.0.14</version>
         </Phoenix_CashOnDelivery>
     </modules>
 
@@ -91,7 +91,7 @@
                         <before>grand_total</before>
                     </phoenix_cashondelivery_tax>
                     <phoenix_cashondelivery_subtotal>
-                      <class>phoenix_cashondelivery/sales_invoice_subtotal</class>
+                        <class>phoenix_cashondelivery/sales_invoice_subtotal</class>
                     </phoenix_cashondelivery_subtotal>
                 </totals>
             </order_invoice>
@@ -111,24 +111,6 @@
             </order_creditmemo>
         </sales>
         <events>
-            <sales_quote_collect_totals_after>
-                <observers>
-                    <phoenix_cashondelivery>
-                        <type>singleton</type>
-                        <class>phoenix_cashondelivery/observer</class>
-                        <method>sales_quote_collect_totals_after</method>
-                    </phoenix_cashondelivery>
-                </observers>
-            </sales_quote_collect_totals_after>
-            <sales_order_payment_place_end>
-                <observers>
-                    <phoenix_cashondelivery>
-                        <type>singleton</type>
-                        <class>phoenix_cashondelivery/observer</class>
-                        <method>sales_order_payment_place_end</method>
-                    </phoenix_cashondelivery>
-                </observers>
-            </sales_order_payment_place_end>
             <order_cancel_after>
                 <observers>
                     <phoenix_cashondelivery>
@@ -138,6 +120,33 @@
                     </phoenix_cashondelivery>
                 </observers>
             </order_cancel_after>
+            <sales_order_payment_place_end>
+                <observers>
+                    <phoenix_cashondelivery>
+                        <type>singleton</type>
+                        <class>phoenix_cashondelivery/observer</class>
+                        <method>sales_order_payment_place_end</method>
+                    </phoenix_cashondelivery>
+                </observers>
+            </sales_order_payment_place_end>
+            <sales_order_place_after>
+                <observers>
+                    <phoenix_cashondelivery>
+                        <type>singleton</type>
+                        <class>phoenix_cashondelivery/observer</class>
+                        <method>invoice_cashondelivery</method>
+                    </phoenix_cashondelivery>
+                </observers>
+            </sales_order_place_after>
+            <sales_quote_collect_totals_after>
+                <observers>
+                    <phoenix_cashondelivery>
+                        <type>singleton</type>
+                        <class>phoenix_cashondelivery/observer</class>
+                        <method>sales_quote_collect_totals_after</method>
+                    </phoenix_cashondelivery>
+                </observers>
+            </sales_quote_collect_totals_after>
         </events>
         <pdf>
             <totals>

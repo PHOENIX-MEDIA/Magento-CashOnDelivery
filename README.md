@@ -10,6 +10,10 @@ This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), M
 Changelog
 ---------
 
+1.0.14
+- Removed not used observer method (Thanks to [sreichel](https://github.com/sreichel/Magento-CashOnDelivery/commit/89cbd3c2d464e900c1c1ac3e00cbc8f8a09cade7))
+- Fixed "Add Create Invoice Option - Add ability to configure that a cash on delivery order automatically create an invoice." (Thanks to [Flipmediaco](https://github.com/Flipmediaco/Magento-CashOnDelivery/commit/8ae36cffd3bbab8e61852810c21a3c3a558378b4) (#19))
+
 1.0.13
 - "SR-714 allow capture offline" (Thanks to [Pascal Querner](https://github.com/MSCG/Magento-CashOnDelivery/commit/75475a11d647f8f14c9a4de0654b068f6a9d079a))
 
