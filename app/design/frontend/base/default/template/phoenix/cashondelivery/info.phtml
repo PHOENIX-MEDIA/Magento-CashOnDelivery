@@ -27,12 +27,12 @@
         $_extra_fee_excl = $this->getCodFeeExclTax();
         $_extra_fee_incl = $this->getCodFeeInclTax();
         if (!is_null($_extra_fee_excl)):
-            if ($this->helper('phoenix_cashondelivery')->displayCodFeeIncludingTax()){
+            if ($this->helper('phoenix_cashondelivery')->displayCodFeeIncludingTax()) {
                 $_codFeeStr = $_extra_fee_incl;
-            }else{
+            } else {
                 $_codFeeStr = $_extra_fee_excl;
                 if ($this->helper('phoenix_cashondelivery')->displayCodBothPrices() && ($_extra_fee_incl != $_extra_fee_excl)) {
-                    $_codFeeStr .= ' ('.$this->__('Incl. Tax').' '.$_extra_fee_incl.')';
+                    $_codFeeStr .= ' (' . $this->__('Incl. Tax') . ' ' . $_extra_fee_incl . ')';
                 }
             }
         ?>
