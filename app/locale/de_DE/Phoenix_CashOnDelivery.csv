@@ -18,5 +18,6 @@
 "Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.","Bitte geben Sie hier ein Merkmalkode sales_flat_quote_address ein, dessen Wert als Basis für die prozentuale Kosten&shy;rechnung genommen wird."
 "Cash on Delivery Tax","Nachnahme Steuer"
 "Display Zero Fee","Nulltarif anzeigen"
+"Invoice Order","Automatische Rechnungs&shy;erstellung"
 "Disallow specific shipping methods","Bestimmte Versandmethoden ausschließen"
 "Disallowed shipping methods","Ausgeschlossene Versandmethoden"

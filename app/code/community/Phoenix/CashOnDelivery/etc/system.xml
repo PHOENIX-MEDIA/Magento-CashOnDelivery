@@ -26,6 +26,7 @@
                         <phoenix_cashondelivery translate="label" module="phoenix_cashondelivery">
                             <label>Cash on Delivery fee</label>
                             <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
                             <sort_order>100</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -40,7 +41,7 @@
                 <phoenix_cashondelivery translate="label" module="phoenix_cashondelivery">
                     <label>Cash on Delivery</label>
                     <frontend_type>text</frontend_type>
-                    <sort_order>1</sort_order>
+                    <sort_order>9990</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
@@ -62,6 +63,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </display_zero_fee>
                         <title translate="label">
                             <label>Title</label>
@@ -70,6 +72,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </title>
                         <order_status translate="label">
                             <label>New Order Status</label>
@@ -79,6 +82,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </order_status>
                         <order_invoice translate="label">
                             <label>Invoice Order</label>
@@ -88,14 +92,17 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </order_invoice>
                         <sort_order translate="label">
                             <label>Sort Order</label>
                             <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
                             <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </sort_order>
                         <shippingallowspecific translate="label">
                             <label>Ship to Applicable Countries</label>
@@ -105,6 +112,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </shippingallowspecific>
                         <shippingspecificcountry translate="label">
                             <label>Ship to Specific Countries</label>
@@ -115,24 +123,29 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <depends>
+                                <active>1</active>
                                 <shippingallowspecific>1</shippingallowspecific>
                             </depends>
                         </shippingspecificcountry>
                         <min_order_total translate="label">
                             <label>Minimum Order Total</label>
                             <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
                             <sort_order>80</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends><active>1</active></depends>
                         </min_order_total>
                         <max_order_total translate="label">
                             <label>Maximum Order Total</label>
                             <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
                             <sort_order>90</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends><active>1</active></depends>
                         </max_order_total>
                         <cost_type translate="label">
                             <label>Cost calculation</label>
@@ -142,42 +155,65 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </cost_type>
+                        <cost_calc_base>
+                            <label>Cost calculation base</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.</comment>
+                            <depends>
+                                <active>1</active>
+                                <cost_type>1</cost_type>
+                            </depends>
+                        </cost_calc_base>
                         <inlandcosts translate="label">
                             <label>Costs for inland shipping</label>
                             <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
                             <sort_order>120</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </inlandcosts>
                         <minimum_inlandcosts translate="label">
                             <label>Costs for inland shipping (minimum)</label>
                             <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
                             <sort_order>125</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <depends>
+                                <active>1</active>
                                 <cost_type>1</cost_type>
                             </depends>
                         </minimum_inlandcosts>
                         <foreigncountrycosts translate="label">
                             <label>Costs for shipping to foreign countries</label>
                             <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
                             <sort_order>130</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </foreigncountrycosts>
                         <minimum_foreigncountrycosts translate="label">
                             <label>Costs for shipping to foreign countries (minimum)</label>
                             <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
                             <sort_order>135</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <depends>
+                                <active>1</active>
                                 <cost_type>1</cost_type>
                             </depends>
                         </minimum_foreigncountrycosts>
@@ -188,6 +224,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </customtext>
                         <disallowspecificshippingmethods translate="label">
                             <label>Disallow specific shipping methods</label>
@@ -197,6 +234,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
                         </disallowspecificshippingmethods>
                         <disallowedshippingmethods translate="label">
                             <label>Disallowed shipping methods</label>
@@ -207,6 +245,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <depends>
+                                <active>1</active>
                                 <disallowspecificshippingmethods>1</disallowspecificshippingmethods>
                             </depends>
                         </disallowedshippingmethods>                        

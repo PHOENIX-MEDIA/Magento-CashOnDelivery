@@ -18,5 +18,6 @@
 "Please enter an sales_flat_quote_address attribute code which will be taken as base for the cost calculation.","Per favore inserire un codice attributo della sales_flat_quote_address che verrà usato come base per il calcolo dei costi."
 "Cash on Delivery Tax","Imposta contrassegno"
 "Display Zero Fee","Mostra quota zero"
+"Invoice Order","Creazione automatica di fattura"
 "Disallow specific shipping methods","Escludere metodi di consegna specifici"
 "Disallowed shipping methods","Modalità di consegna excludidos"
