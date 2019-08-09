@@ -10,6 +10,12 @@ This extension is maintained by [PHOENIX MEDIA](http://www.phoenix-media.eu/), M
 Changelog
 ---------
 
+1.0.16
+- Resolve "Wrong currency in backend orders" (Thanks to [postadelmaga](https://github.com/PHOENIX-MEDIA/Magento-CashOnDelivery/commit/0cf58ed14715439746f26fcfc72d6939be9d8568) (#49))
+- Hide config options if module is disabled (Thanks to [sreichel](https://github.com/sreichel/Magento-CashOnDelivery/commit/a0ba5148f4f368fb4a553e416555ea10d213a0c6))
+- Fixed "Display Zero Fee" in customer account order view" (Thanks to [idziakjakub](https://github.com/macopedia/Magento-CashOnDelivery/commit/ba0f39433f8cbae7cb79cd19a6da0c70d541e1c8) (#21))
+- Resolve "Disable CoD for virtual quotes" (Thanks to [PHOENIX-MEDIA](https://github.com/PHOENIX-MEDIA/Magento-CashOnDelivery/commit/1f66cac834e77a4bab76f7c0308f5be50eb9813f) (#13))
+
 1.0.15
 - Quote data to order data using sales_convert_quote fieldset (Thanks to [postadelmaga](https://github.com/PHOENIX-MEDIA/Magento-CashOnDelivery/commit/85a7fc31ec3de24e89ee68a1e62f409238ec7418) (#50))
 - Add "cod_fee", "base_cod_fee" attributes to webservices (Thanks to [tawfekov](https://github.com/tawfekov/Magento-CashOnDelivery/commit/db91efdf110a1b9114e9d9e232925f20d382ae32) (#33))
