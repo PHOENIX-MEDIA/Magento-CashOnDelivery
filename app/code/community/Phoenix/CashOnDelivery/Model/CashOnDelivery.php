@@ -164,16 +164,16 @@ class Phoenix_CashOnDelivery_Model_CashOnDelivery extends Mage_Payment_Model_Met
      * @return bool
      */
     public function isAvailable($quote = null)
-    {
-        if ($quote->isVirtual()) {
-            return false;
-        }
-
+    {        
         if (!parent::isAvailable($quote)) {
             return false;
         }
 
         if (!is_null($quote)) {
+            if ($quote->isVirtual()) {
+                return false;
+            }
+            
             if ($this->getConfigData('shippingallowspecific', $quote->getStoreId()) == 1) {
                 $country            = $quote->getShippingAddress()->getCountry();
                 $availableCountries = $this->getConfigData('shippingspecificcountry', $quote->getStoreId());
