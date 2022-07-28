@@ -182,7 +182,7 @@
             <phoenix_cashondelivery>
                 <active>0</active>
                 <model>phoenix_cashondelivery/cashOnDelivery</model>
-                <order_status>1</order_status>
+                <order_status>0</order_status>
                 <title>Cash on Delivery</title>
                 <allowspecific>0</allowspecific>
                 <shippingallowspecific>0</shippingallowspecific>
